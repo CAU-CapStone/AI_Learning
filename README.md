@@ -2,7 +2,7 @@
 
 사용 예시
 ```cs
-//객체 생성; Neighbors 프로퍼티로 확인할 이웃 수 결정
+//객체 생성; Neighbors 프로퍼티로 확인할 이웃 수 결정(기본값 5)
 //제네릭 타입은 Tuple 가능
 //여기선 T = Tuple<double, double>
 Knn<(double, double)> knn = new()
