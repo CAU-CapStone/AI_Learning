@@ -31,5 +31,5 @@ bream은 붉은색 원, smelt는 푸른색 원
 예측한 물고기는 각 종류에 해당하는 색깔의 사각형
 이웃들은 초록색 원
 
-![예시 이미지 1]()
-![예시 이미지 2]()
+![예시 이미지 1](https://github.com/CAU-CapStone/AI_Learning/blob/ml/Captures/red_pred.png)
+![예시 이미지 2](https://github.com/CAU-CapStone/AI_Learning/blob/ml/Captures/blue_pred.png)
