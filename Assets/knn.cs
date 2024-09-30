@@ -57,7 +57,6 @@ public class Knn<T> where T : ITuple
             .Key;
         
         List<T> points = neighbors
-            .Where(x => x.target == predict)
             .Select(x => x.feature)
             .ToList();
         

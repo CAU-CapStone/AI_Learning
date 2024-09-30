@@ -641,6 +641,8 @@ MonoBehaviour:
   redDot: {fileID: 5213928080913042903, guid: 6cfb1a3c44d4fde4da800140c2fb283c, type: 3}
   blueDot: {fileID: 5213928080913042903, guid: c3a3a5028cd8d724a821a602f2f83242, type: 3}
   greenDot: {fileID: 5213928080913042903, guid: 9b9153ddcfd46834a8bcd4156ca7e6b1, type: 3}
+  redDotSquare: {fileID: 96855628984464484, guid: 4cbec546493e25642801db1052bd3134, type: 3}
+  blueDotSquare: {fileID: 96855628984464484, guid: 22805e9652515e54f9664e93cbf6910f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

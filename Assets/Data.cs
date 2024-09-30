@@ -31,8 +31,8 @@ public class Data : MonoBehaviour
         6.7, 7.5, 7.0, 9.7, 9.8, 8.7, 10.0, 9.9, 9.8, 12.2, 13.4, 12.2, 19.7, 19.9
     };
 
-    private double fish_length = 30;
-    private double fish_weight = 600;
+    private double fish_length = 10;
+    private double fish_weight = 8;
     
     public Camera camera;
     public GameObject redDot;
