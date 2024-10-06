@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.monitor1394.xcharts": {
+      "version": "https://github.com/XCharts-Team/XCharts.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "4f38b59288e9f9f1b844d854c688e67d58d02bcf"
+    },
     "com.unity.collab-proxy": {
       "version": "2.3.1",
       "depth": 0,
