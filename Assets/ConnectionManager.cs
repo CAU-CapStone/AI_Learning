@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -86,10 +87,10 @@ public class ConnectionManager : MonoBehaviour
                 // Successfully connected to an Inlet
                 RectTransform inlet = result.gameObject.GetComponent<RectTransform>();
                 DrawLine(outlet.position, inlet.position);  // Finalize the connection
-                ConnectionLine connectionLine = currentLine.GetComponent<ConnectionLine>();
+                /*ConnectionLine connectionLine = currentLine.GetComponent<ConnectionLine>();
                 connectionLine.startPoint = outlet;
                 connectionLine.endPoint = inlet;
-                connectionLine.currentConnectionType = ConnectionType.Data;
+                connectionLine.currentConnectionType = ConnectionType.Data;*/
                 Debug.Log("Connected to: " + result.gameObject.name);
                 outlet.gameObject.tag = "Untagged";  // Reset the Outlet tag
                 return;
@@ -99,10 +100,10 @@ public class ConnectionManager : MonoBehaviour
                 // Successfully connected to an Inlet
                 RectTransform inlet = result.gameObject.GetComponent<RectTransform>();
                 DrawLine(outlet.position, inlet.position);  // Finalize the connection
-                ConnectionLine connectionLine = currentLine.GetComponent<ConnectionLine>();
+                /*ConnectionLine connectionLine = currentLine.GetComponent<ConnectionLine>();
                 connectionLine.startPoint = outlet;
                 connectionLine.endPoint = inlet;
-                connectionLine.currentConnectionType = ConnectionType.Prediction;
+                connectionLine.currentConnectionType = ConnectionType.Prediction;*/
                 Debug.Log("Connected to: " + result.gameObject.name);
                 outlet.gameObject.tag = "Untagged";  // Reset the Outlet tag
                 return;
@@ -117,7 +118,7 @@ public class ConnectionManager : MonoBehaviour
     // Function to draw a line (using a UI Image) between two points
     private void DrawLine(Vector3 start, Vector3 end)
     {
-        currentLine.GetComponent<ConnectionLine>().DrawArrow(start, end);
+        //currentLine.GetComponent<ConnectionLine>().DrawArrow(start, end);
         Vector3 direction = end - start;
         float distance = direction.magnitude;
 
