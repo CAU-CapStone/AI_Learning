@@ -7,7 +7,7 @@
       "dependencies": {}
     },
     "com.unity.collab-proxy": {
-      "version": "2.3.1",
+      "version": "2.5.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -132,7 +132,7 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.9.2",
+      "version": "1.9.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
