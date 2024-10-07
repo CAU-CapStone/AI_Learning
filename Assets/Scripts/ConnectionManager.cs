@@ -6,16 +6,17 @@ using UnityEngine.UI;
 
 public class ConnectionManager : MonoBehaviour
 {
-   public RectTransform linePrefab;    // Prefab for the line (Image)
-    public GraphicRaycaster raycaster;  // Reference to the Canvas' GraphicRaycaster
-    public Canvas canvas;               // Reference to the Canvas
-    private bool isDragging = false;    // Track whether dragging is in progress
-    private RectTransform currentLine;  // The line currently being drawn
-    private RectTransform outlet;       // The outlet where dragging started
-    private Vector3 startMousePosition; // Start position of the mouse
-    public EventSystem eventSystem;    // Reference to the EventSystem
+   public RectTransform linePrefab;    
+    public GraphicRaycaster raycaster;  
+    public Canvas canvas;               
+    private bool isDragging = false;    
+    private RectTransform currentLine;  
+    private RectTransform outlet;     
+    private Vector3 startMousePosition; 
+    public EventSystem eventSystem;
     private ConnectionType currentConnectionType;
-    
+
+    //연결 타입
     public enum ConnectionType
     {
         None,
@@ -26,35 +27,37 @@ public class ConnectionManager : MonoBehaviour
     void Start()
     {
         currentConnectionType = ConnectionType.None;
-        // Assign these manually or through the Inspector
+        //레이캐스터가 없으면 찾아서 할당
         if (raycaster == null)
             raycaster = FindObjectOfType<GraphicRaycaster>();
 
+        //캔버스가 없으면 찾아서 할당
         if (eventSystem == null)
             eventSystem = FindObjectOfType<EventSystem>();
     }
     
     void Update()
     {
+        //처음 누르기 시작하면 OnMouseDown 호출
         if(!isDragging && Input.GetMouseButtonDown(0))
         {
             OnMouseDown();
         }
         if (isDragging && currentLine != null)
         {
-            // Continuously update the line position while dragging
+            //드래그 중일 때 선 그리기
             Vector3 cursorPosition = Input.mousePosition;
             DrawLine(outlet.position, cursorPosition);
         }
 
-        // Detect when the mouse button is released
+        // 마우스 버튼 떼면 드래그 종료
         if (Input.GetMouseButtonUp(0) && isDragging)
         {
             OnMouseUp();
         }
     }
 
-    // When an Outlet is clicked, start dragging
+    //아웃렛 클릭시 호출
     public void OnOutletClick(RectTransform outletTransform)
     {
         outlet = outletTransform;
@@ -68,12 +71,12 @@ public class ConnectionManager : MonoBehaviour
         DrawLine(outlet.position, outlet.position);
     }
 
-    // Handle mouse button release (stop dragging)
+    //마우스 떼면 호출
     public void OnMouseUp()
     {
         isDragging = false;
 
-        // Use GraphicRaycaster to check if the mouse is over an Inlet
+        // 포인터가 inlet에 있는지 확인
         PointerEventData pointerData = new PointerEventData(EventSystem.current);
         pointerData.position = Input.mousePosition;
 
@@ -82,58 +85,53 @@ public class ConnectionManager : MonoBehaviour
 
         foreach (RaycastResult result in results)
         {
+            //data inlet에 드랍했을 때
             if (result.gameObject.CompareTag("DataInlet") && currentConnectionType == ConnectionType.Data)
             {
-                // Successfully connected to an Inlet
                 RectTransform inlet = result.gameObject.GetComponent<RectTransform>();
-                DrawLine(outlet.position, inlet.position);  // Finalize the connection
-                /*ConnectionLine connectionLine = currentLine.GetComponent<ConnectionLine>();
-                connectionLine.startPoint = outlet;
-                connectionLine.endPoint = inlet;
-                connectionLine.currentConnectionType = ConnectionType.Data;*/
+                DrawLine(outlet.position, inlet.position); // 선 그리기 (확정)
+                ConnectionLine connectionLine = currentLine.GetComponent<ConnectionLine>();
+                connectionLine.NewLine(outlet, inlet, ConnectionType.Data);
                 Debug.Log("Connected to: " + result.gameObject.name);
-                outlet.gameObject.tag = "Untagged";  // Reset the Outlet tag
+                outlet.gameObject.tag = "Untagged";// tag reset
+                inlet.gameObject.tag = "Untagged"; // tag reset
                 return;
             }
+            //prediction inlet에 드랍했을 때
             else if (result.gameObject.CompareTag("PredictionInlet") && currentConnectionType == ConnectionType.Prediction)
             {
-                // Successfully connected to an Inlet
                 RectTransform inlet = result.gameObject.GetComponent<RectTransform>();
-                DrawLine(outlet.position, inlet.position);  // Finalize the connection
-                /*ConnectionLine connectionLine = currentLine.GetComponent<ConnectionLine>();
-                connectionLine.startPoint = outlet;
-                connectionLine.endPoint = inlet;
-                connectionLine.currentConnectionType = ConnectionType.Prediction;*/
+                DrawLine(outlet.position, inlet.position);  // 선 그리기 (확정)
+                ConnectionLine connectionLine = currentLine.GetComponent<ConnectionLine>();
+                connectionLine.NewLine(outlet, inlet, ConnectionType.Prediction);
                 Debug.Log("Connected to: " + result.gameObject.name);
-                outlet.gameObject.tag = "Untagged";  // Reset the Outlet tag
+                outlet.gameObject.tag = "Untagged";  // tag reset
+                inlet.gameObject.tag = "Untagged"; // tag reset
                 return;
             }
         }
 
-        // If not dropped on an Inlet, destroy the line
+        // Inlet에 드랍하지 않았을 때, 삭제
         Destroy(currentLine.gameObject);
         Debug.Log("No valid Inlet found, line removed.");
     }
 
-    // Function to draw a line (using a UI Image) between two points
+    //선 그리기
     private void DrawLine(Vector3 start, Vector3 end)
     {
-        //currentLine.GetComponent<ConnectionLine>().DrawArrow(start, end);
         Vector3 direction = end - start;
         float distance = direction.magnitude;
-
-        // Set the position of the line to be the midpoint between the start and end points
+        //선 위치 조정
         currentLine.position = (start + end) / 2;
-
-        // Set the width of the line based on the distance between the two points
+        
+        //사이즈 조정
         currentLine.sizeDelta = new Vector2(distance, currentLine.sizeDelta.y);
-
-        // Rotate the line to point from the start to the end
+        //방향 조정
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         currentLine.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    // Detect clicks on Outlets using GraphicRaycaster
+    //마우스 누르면 호출
     public void OnMouseDown()
     {
         PointerEventData pointerData = new PointerEventData(EventSystem.current);
@@ -141,25 +139,21 @@ public class ConnectionManager : MonoBehaviour
 
         List<RaycastResult> results = new List<RaycastResult>();
         raycaster.Raycast(pointerData, results);
-
-        Debug.Log("Raycast hit " + results.Count + " UI elements.");
         foreach (RaycastResult result in results)
         {
             Debug.Log("Hit UI Element: " + result.gameObject.name);
             if (result.gameObject.CompareTag("DataOutlet"))
             {
                 currentConnectionType = ConnectionType.Data;
-                Debug.Log("Outlet clicked: " + result.gameObject.name);
                 RectTransform outletRect = result.gameObject.GetComponent<RectTransform>();
-                OnOutletClick(outletRect);  // Start the drag from the Outlet
+                OnOutletClick(outletRect);  // outlet에서 드래그 시작
                 return;
             }
             else if (result.gameObject.CompareTag("PredictionOutlet"))
             {
                 currentConnectionType = ConnectionType.Prediction;
-                Debug.Log("Outlet clicked: " + result.gameObject.name);
                 RectTransform outletRect = result.gameObject.GetComponent<RectTransform>();
-                OnOutletClick(outletRect);  // Start the drag from the Outlet
+                OnOutletClick(outletRect);  // outlet에서 드래그 시작
                 return;
             }
             else if (result.gameObject.CompareTag("Arrow"))
