@@ -22,7 +22,7 @@ public class CSVScatterPlot : MonoBehaviour
         Legend legend = scatterChart.EnsureChartComponent<Legend>();
 
         title.text = "Fish Market";
-        xAxis.axisName.name = "Lenght";
+        xAxis.axisName.name = "Length";
         yAxis.axisName.name = "Weight";
         xAxis.axisName.show = true; 
         yAxis.axisName.show = true;
