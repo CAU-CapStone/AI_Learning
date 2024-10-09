@@ -5,10 +5,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// knn 퀴즈 예제 코드
+/// </summary>
 public class KnnExample : MonoBehaviour
 {
-    private Knn<(double, double)> knn = new();
-    
+    //데이터
     private List<double> bream_length = new()
     {
         25.4, 26.3, 26.5, 29.0, 29.0, 29.7, 29.7, 30.0, 30.0, 30.7, 31.0, 31.0,
@@ -32,37 +34,37 @@ public class KnnExample : MonoBehaviour
     {
         6.7, 7.5, 7.0, 9.7, 9.8, 8.7, 10.0, 9.9, 9.8, 12.2, 13.4, 12.2, 19.7, 19.9
     };
-
+    
+    //knn 객체 생성 및 필요한 variable들
+    private Knn<(double, double)> knn = new();
     private double fish_length = 35;
     private double fish_weight = 700;
-    
-    public Camera camera;
-    public GameObject redDot;
-    public GameObject blueDot;
-    public GameObject greenDot;
-    public GameObject redDotSquare;
-    public GameObject blueDotSquare;
-
-    public ListScatterPlot scatterChart;
+   
+    public ListScatterPlot scatterChart; //scatterChart 객체
     
     //connection 순서 나타내는 bool (노드가 2개라 bool 사용)
-    bool dataConnectionOrder = false;
-    bool predictionConnectionOrder = false;
+    bool dataConnectionOrder = false; //데이터가 같은 index의 노드에 연결되어있으면 true
+    bool predictionConnectionOrder = false; // prediction이 같은 index의 노드에 연결되어있으면 true
     
     static string buttonHierarchyPath = "Canvas/GoButton";
-    public static List<ConnectionLine> Connections = new List<ConnectionLine>();
+    public static List<ConnectionLine> Connections = new List<ConnectionLine>(); //모든 연결 화살표를 저장할 리스트
 
     void Start()
     {
         //버튼 눌렀을 때 knnQuiz 함수 실행하도록 연결
         GameObject.Find(buttonHierarchyPath).GetComponent<Button>().onClick.AddListener(KnnQuiz);
+        
+        //scatterChart 객체 찾아서 비활성화
         scatterChart = GameObject.Find("ChartCanvas/ScatterChart").GetComponent<ListScatterPlot>();
         scatterChart.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// knn driver함수. knn 퀴즈의 핵심 파츠
+    /// </summary>
     public void KnnQuiz()
     {
-        //모든 노드가 연결되었는지 확인
+        //모든 노드가 연결되었는지 확인. 노드가 많아지면 바뀌어야 하는 숫자.
         if (Connections.Count < 5)
         {
             Debug.Log("Not all nodes are connected");
@@ -95,22 +97,9 @@ public class KnnExample : MonoBehaviour
             }
         }
 
-        //knn learning code///
-        
+        //scatterChart 초기화
         scatterChart.gameObject.SetActive(true);
         scatterChart.setTitle("Fish");
-
-        /*//data parsing
-        for (int i = 0; i < bream_length.Count; i++)
-        {
-            //Instantiate(redDot, new Vector3((float)bream_length[i] / 2, 0, (float)bream_weight[i] / 100), Quaternion.identity);
-
-        }
-        
-        for (int i = 0; i < smelt_length.Count; i++)
-        {
-            Instantiate(blueDot, new Vector3((float)smelt_length[i] / 2, 0, (float)smelt_weight[i] / 100), Quaternion.identity);
-        }*/
 
         //데이터 블록 커넥션. 만약 length가 0번째에 연결되어있으면 length가 x축, weight가 y축, 반대면 weight가 x축, length가 y축
         List<(double, double)> features = new();
@@ -133,8 +122,11 @@ public class KnnExample : MonoBehaviour
                 smelt.Add((smelt_weight[i], smelt_length[i]));
         }
         
+        //scatterChart에 학습 데이터 시각화
         scatterChart.setData("bream",bream);
         scatterChart.setData("smelt",smelt);
+        
+        //학습 데이터 knn에 넣기
         features.AddRange(bream);
         features.AddRange(smelt);
 
@@ -146,11 +138,13 @@ public class KnnExample : MonoBehaviour
 
         knn.Fit(features, targets);
         
-        //knn prediction code
-
+        ////////////////////////
+        //knn prediction code///
+        ////////////////////////
         //prediction block 커넥션
         (int target, List< (double,double)>feature) predict;
-        Debug.Log(dataConnectionOrder.ToString() +" : "+ predictionConnectionOrder.ToString());
+        
+        //만약 predictionConnectionOrder true면 length가 x축, weight가 y축, 반대면 weight가 x축, length가 y축으로 predict 후 분류 plot.
         if (predictionConnectionOrder)
         {
             predict = knn.Predict((fish_length,fish_weight));
@@ -175,24 +169,5 @@ public class KnnExample : MonoBehaviour
                 scatterChart.setData("smelt_predicted", new List<(double, double)>() { (fish_weight, fish_length) });
             }
         }
-
-
-        //기존 그래프
-        /*switch (predict.Item1)
-        {
-            case 0:
-                Instantiate(redDotSquare, new Vector3((float)fish_length / 2, 0, (float)fish_weight / 100), Quaternion.identity);
-                break;
-                
-            case 1:
-                Instantiate(blueDotSquare, new Vector3((float)fish_length / 2, 0, (float)fish_weight / 100), Quaternion.identity);
-                break;
-        }
-
-        foreach (var feature in predict.Item2)
-        {
-            Instantiate(greenDot, new Vector3((float)feature.Item1 / 2, 0, (float)feature.Item2 / 100), Quaternion.identity);
-        }
-        camera.transform.position = new Vector3(10, 10, 4);*/
     }
 }

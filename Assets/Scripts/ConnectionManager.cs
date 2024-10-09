@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// 블록들 연결 관리 클래스
+/// </summary>
 public class ConnectionManager : MonoBehaviour
 {
    public RectTransform linePrefab;    
@@ -116,7 +119,7 @@ public class ConnectionManager : MonoBehaviour
         Debug.Log("No valid Inlet found, line removed.");
     }
 
-    //선 그리기
+    //선 그리기 (Update에서 호출)
     private void DrawLine(Vector3 start, Vector3 end)
     {
         Vector3 direction = end - start;
@@ -131,7 +134,7 @@ public class ConnectionManager : MonoBehaviour
         currentLine.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    //마우스 누르면 호출
+    //마우스 클릭 시 호출
     public void OnMouseDown()
     {
         PointerEventData pointerData = new PointerEventData(EventSystem.current);
