@@ -51,4 +51,9 @@ public class ListScatterPlot : MonoBehaviour
             newSerie.symbol.size = symbolSize;
         }
     }
+
+    public void resetData()
+    {
+        scatterChart.RemoveAllSerie();
+    }
 }
