@@ -33,8 +33,8 @@ public class KnnExample : MonoBehaviour
         6.7, 7.5, 7.0, 9.7, 9.8, 8.7, 10.0, 9.9, 9.8, 12.2, 13.4, 12.2, 19.7, 19.9
     };
 
-    private double fish_length = 10;
-    private double fish_weight = 8;
+    private double fish_length = 35;
+    private double fish_weight = 700;
     
     public Camera camera;
     public GameObject redDot;
@@ -42,6 +42,8 @@ public class KnnExample : MonoBehaviour
     public GameObject greenDot;
     public GameObject redDotSquare;
     public GameObject blueDotSquare;
+
+    public ListScatterPlot scatterChart;
     
     //connection 순서 나타내는 bool (노드가 2개라 bool 사용)
     bool dataConnectionOrder = false;
@@ -54,6 +56,8 @@ public class KnnExample : MonoBehaviour
     {
         //버튼 눌렀을 때 knnQuiz 함수 실행하도록 연결
         GameObject.Find(buttonHierarchyPath).GetComponent<Button>().onClick.AddListener(KnnQuiz);
+        scatterChart = GameObject.Find("ChartCanvas/ScatterChart").GetComponent<ListScatterPlot>();
+        scatterChart.gameObject.SetActive(false);
     }
 
     public void KnnQuiz()
@@ -78,9 +82,11 @@ public class KnnExample : MonoBehaviour
                     Debug.Log("Types must be connected together");
                     return;
                 }
-
-                //만약 0번 노드가 0번 노드에 연결되어있으면 dataConnectionOrder true
-                dataConnectionOrder = index.Item1.Equals(index.Item2);
+                else if (index.Item1 != 2)
+                {
+                    //만약 0번 노드가 0번 노드에 연결되어있으면 dataConnectionOrder true
+                    dataConnectionOrder = index.Item1.Equals(index.Item2);
+                }
             }
             else if(connect.currentConnectionType == ConnectionManager.ConnectionType.Prediction)
             {
@@ -91,34 +97,47 @@ public class KnnExample : MonoBehaviour
 
         //knn learning code///
         
-        //data parsing
+        scatterChart.gameObject.SetActive(true);
+        scatterChart.setTitle("Fish");
+
+        /*//data parsing
         for (int i = 0; i < bream_length.Count; i++)
         {
-            Instantiate(redDot, new Vector3((float)bream_length[i] / 2, 0, (float)bream_weight[i] / 100), Quaternion.identity);
+            //Instantiate(redDot, new Vector3((float)bream_length[i] / 2, 0, (float)bream_weight[i] / 100), Quaternion.identity);
+
         }
         
         for (int i = 0; i < smelt_length.Count; i++)
         {
             Instantiate(blueDot, new Vector3((float)smelt_length[i] / 2, 0, (float)smelt_weight[i] / 100), Quaternion.identity);
-        }
+        }*/
 
         //데이터 블록 커넥션. 만약 length가 0번째에 연결되어있으면 length가 x축, weight가 y축, 반대면 weight가 x축, length가 y축
         List<(double, double)> features = new();
+        List<(double, double)> bream = new();
+        List<(double, double)> smelt = new();
         if (dataConnectionOrder)
         {
+            scatterChart.setAxisName("Length", "Weight");
             for (int i = 0; i < bream_length.Count; i++)
-                features.Add((bream_length[i], bream_weight[i]));
+                bream.Add((bream_length[i], bream_weight[i]));
             for (int i = 0; i < smelt_length.Count; i++)
-                features.Add((smelt_length[i], smelt_weight[i]));
+                smelt.Add((smelt_length[i], smelt_weight[i]));
         }
         else
         {
+            scatterChart.setAxisName("Weight", "Length");
             for (int i = 0; i < bream_length.Count; i++)
-                features.Add((bream_weight[i], bream_length[i]));
+                bream.Add((bream_weight[i], bream_length[i]));
             for (int i = 0; i < smelt_length.Count; i++)
-                features.Add((smelt_weight[i], smelt_length[i]));
+                smelt.Add((smelt_weight[i], smelt_length[i]));
         }
         
+        scatterChart.setData("bream",bream);
+        scatterChart.setData("smelt",smelt);
+        features.AddRange(bream);
+        features.AddRange(smelt);
+
         List<int> targets = new();
         for (int i = 0; i < bream_length.Count; i++)
             targets.Add(0);
@@ -128,18 +147,38 @@ public class KnnExample : MonoBehaviour
         knn.Fit(features, targets);
         
         //knn prediction code
-        
-        GameObject.Find("Canvas").SetActive(false);
-        
-        
+
         //prediction block 커넥션
-        var predict = knn.Predict((fish_length, fish_weight));
-        if (!predictionConnectionOrder)
+        (int target, List< (double,double)>feature) predict;
+        Debug.Log(dataConnectionOrder.ToString() +" : "+ predictionConnectionOrder.ToString());
+        if (predictionConnectionOrder)
+        {
+            predict = knn.Predict((fish_length,fish_weight));
+            if (predict.target == 0)
+            {
+                scatterChart.setData("bream_predicted", new List<(double, double)>() { (fish_length, fish_weight) });
+            }
+            else if (predict.target == 1)
+            {
+                scatterChart.setData("smelt_predicted", new List<(double, double)>() { (fish_length, fish_weight) });
+            }
+        }
+        else
         {
             predict = knn.Predict((fish_weight,fish_length));
+            if (predict.target == 0)
+            {
+                scatterChart.setData("bream_predicted", new List<(double, double)>() { (fish_weight, fish_length) });
+            }
+            else if (predict.target == 1)
+            {
+                scatterChart.setData("smelt_predicted", new List<(double, double)>() { (fish_weight, fish_length) });
+            }
         }
-        
-        switch (predict.Item1)
+
+
+        //기존 그래프
+        /*switch (predict.Item1)
         {
             case 0:
                 Instantiate(redDotSquare, new Vector3((float)fish_length / 2, 0, (float)fish_weight / 100), Quaternion.identity);
@@ -154,6 +193,6 @@ public class KnnExample : MonoBehaviour
         {
             Instantiate(greenDot, new Vector3((float)feature.Item1 / 2, 0, (float)feature.Item2 / 100), Quaternion.identity);
         }
-        camera.transform.position = new Vector3(10, 10, 4);
+        camera.transform.position = new Vector3(10, 10, 4);*/
     }
 }
