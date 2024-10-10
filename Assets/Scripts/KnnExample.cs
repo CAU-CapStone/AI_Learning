@@ -148,6 +148,7 @@ public class KnnExample : MonoBehaviour
         if (predictionConnectionOrder)
         {
             predict = knn.Predict((fish_length,fish_weight));
+            scatterChart.setData("Nearest Neighbors", predict.feature);
             if (predict.target == 0)
             {
                 scatterChart.setData("bream_predicted", new List<(double, double)>() { (fish_length, fish_weight) });
@@ -160,6 +161,7 @@ public class KnnExample : MonoBehaviour
         else
         {
             predict = knn.Predict((fish_weight,fish_length));
+            scatterChart.setData("Nearest Neighbors", predict.feature);
             if (predict.target == 0)
             {
                 scatterChart.setData("bream_predicted", new List<(double, double)>() { (fish_weight, fish_length) });
