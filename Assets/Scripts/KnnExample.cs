@@ -56,7 +56,7 @@ public class KnnExample : MonoBehaviour
         
         //scatterChart 객체 찾아서 비활성화
         scatterChart = GameObject.Find("ChartCanvas/ScatterChart").GetComponent<ListScatterPlot>();
-        scatterChart.gameObject.SetActive(false);
+        scatterChart.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -98,7 +98,7 @@ public class KnnExample : MonoBehaviour
         }
 
         //scatterChart 초기화
-        scatterChart.gameObject.SetActive(true);
+        scatterChart.transform.parent.gameObject.SetActive(true);
         scatterChart.setTitle("Fish");
 
         //데이터 블록 커넥션. 만약 length가 0번째에 연결되어있으면 length가 x축, weight가 y축, 반대면 weight가 x축, length가 y축
