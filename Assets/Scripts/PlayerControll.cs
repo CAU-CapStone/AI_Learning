@@ -13,11 +13,14 @@ public class PlayerControll : MonoBehaviour
     private CharacterController controller;
     private Vector2 moveDirection = Vector2.zero;
     private Vector3 lookDirection = Vector3.zero;
+
+    private Player _player;
     
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        _player = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -42,6 +45,22 @@ public class PlayerControll : MonoBehaviour
     {
         Vector2 value2 = value.Get<Vector2>();
         lookDirection += new Vector3(0, value2.x, 0) * rotationSpeed;
+    }
+    
+    void OnInteract()
+    {
+        Transform t = _player._currentTrigger;
+        if (t != null)
+        {
+            if(t.CompareTag("NPC"))
+            {
+                Debug.Log("Interacting with NPC");
+            }
+            else if(t.CompareTag("Portal"))
+            {
+                Debug.Log("Interacting with Portal");
+            }
+        }
     }
 
     void SetCameraPosition()
