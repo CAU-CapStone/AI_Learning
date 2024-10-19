@@ -79,6 +79,7 @@ public class ObjectDragAndDrop : MonoBehaviour
                     Vector3 selectedPosition = selectedObject.transform.position;
                     selectedPosition.y = 0.7f;
                     selectedObject.transform.position = selectedPosition;
+                    selectedObject.layer = LayerMask.GetMask("Default");
                     Debug.Log("돌멩이를 작은 바구니에 넣었습니다!");
                 }
                 else if(largeBasketDistance < 2.0f && largeBasket.TryAddItem(selectedObject))
@@ -86,6 +87,7 @@ public class ObjectDragAndDrop : MonoBehaviour
                     Vector3 selectedPosition = selectedObject.transform.position;
                     selectedPosition.y = 0.7f;
                     selectedObject.transform.position = selectedPosition;
+                    selectedObject.layer = LayerMask.GetMask("Default");
                     Debug.Log("돌멩이를 큰 바구니에 넣었습니다!");
                 }
                 else
