@@ -75,11 +75,17 @@ public class ObjectDragAndDrop : MonoBehaviour
                 Debug.Log("큰 바구니 사이 거리: " + largeBasketDistance);
 
                 if (smallBasketDistance < 2.0f && smallBasket.TryAddItem(selectedObject))
-                {                    
+                {
+                    Vector3 selectedPosition = selectedObject.transform.position;
+                    selectedPosition.y = 0.7f;
+                    selectedObject.transform.position = selectedPosition;
                     Debug.Log("돌멩이를 작은 바구니에 넣었습니다!");
                 }
                 else if(largeBasketDistance < 2.0f && largeBasket.TryAddItem(selectedObject))
                 {
+                    Vector3 selectedPosition = selectedObject.transform.position;
+                    selectedPosition.y = 0.7f;
+                    selectedObject.transform.position = selectedPosition;
                     Debug.Log("돌멩이를 큰 바구니에 넣었습니다!");
                 }
                 else

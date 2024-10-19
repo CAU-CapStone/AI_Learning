@@ -50,9 +50,9 @@ public class ItemModifier : MonoBehaviour
         }
         else
         {
-            newScale.x = largeBasket.AnswerScale;
-            newScale.y = largeBasket.AnswerScale;
-            newScale.z = largeBasket.AnswerScale;
+            newScale.x = answerBasket.AnswerScale;
+            newScale.y = answerBasket.AnswerScale;
+            newScale.z = answerBasket.AnswerScale;
         }
 
         return newScale;
