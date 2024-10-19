@@ -14,7 +14,7 @@ public class Quiz1 : MonoBehaviour
     {
         if(smallQuizBasket.isFull() && largeQuizBasket.isFull())
         {
-            Debug.Log("Quiz1 Clear");
+            Debug.Log("Quiz Clear");
             gameObject.SetActive(false);
             OnQuizClear?.Invoke();
         }

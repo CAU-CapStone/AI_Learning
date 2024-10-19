@@ -70,9 +70,7 @@ public class ObjectDragAndDrop : MonoBehaviour
 
                 
                 float smallBasketDistance = Vector3.Distance(selectedObject.transform.position, smallBasket.transform.position);
-                Debug.Log("작은 바구니 사이 거리: "+smallBasketDistance);
                 float largeBasketDistance = Vector3.Distance(selectedObject.transform.position, largeBasket.transform.position);
-                Debug.Log("큰 바구니 사이 거리: " + largeBasketDistance);
 
                 if (smallBasketDistance < 2.0f && smallBasket.TryAddItem(selectedObject))
                 {
@@ -80,7 +78,7 @@ public class ObjectDragAndDrop : MonoBehaviour
                     selectedPosition.y = 0.7f;
                     selectedObject.transform.position = selectedPosition;
                     selectedObject.layer = LayerMask.GetMask("Default");
-                    Debug.Log("돌멩이를 작은 바구니에 넣었습니다!");
+                    //Debug.Log("돌멩이를 작은 바구니에 넣었습니다!");
                 }
                 else if(largeBasketDistance < 2.0f && largeBasket.TryAddItem(selectedObject))
                 {
@@ -88,7 +86,7 @@ public class ObjectDragAndDrop : MonoBehaviour
                     selectedPosition.y = 0.7f;
                     selectedObject.transform.position = selectedPosition;
                     selectedObject.layer = LayerMask.GetMask("Default");
-                    Debug.Log("돌멩이를 큰 바구니에 넣었습니다!");
+                    //Debug.Log("돌멩이를 큰 바구니에 넣었습니다!");
                 }
                 else
                 {
