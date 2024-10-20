@@ -7,18 +7,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Transform _currentTrigger;
-    void Start()
+    void Awake()
     {
         _currentTrigger = null;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("NPC"))
-        {
-            _currentTrigger = other.transform;
-        }
-        else if (other.CompareTag("Portal"))
+        if (other.CompareTag("NPC") || other.CompareTag("Portal"))
         {
             _currentTrigger = other.transform;
         }

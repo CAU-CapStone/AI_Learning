@@ -55,10 +55,12 @@ public class PlayerControll : MonoBehaviour
             if(t.CompareTag("NPC"))
             {
                 Debug.Log("Interacting with NPC");
+                t.GetComponent<Interaction>().Activate();
             }
             else if(t.CompareTag("Portal"))
             {
                 Debug.Log("Interacting with Portal");
+                t.GetComponent<Interaction>().Activate();
             }
         }
     }
