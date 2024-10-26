@@ -4,11 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - DataOutlet
-  - DataInlet
-  - PredictionOutlet
-  - PredictionInlet
-  - Arrow
+  - NPC
+  - Portal
   layers:
   - Default
   - TransparentFX
