@@ -12,10 +12,10 @@ public class DialogueTest : MonoBehaviour
     void Start()
     {
         DialogueManager.Instance.onDialogueEnd.AddListener(() => Debug.Log("End Dialogue"));
+        
         startBtn.onClick.AddListener(() =>
         {
             DialogueManager.Instance.SetDialogue(2, 4);
-            DialogueManager.Instance.ShowNextDialogue();
         });
         
         nextBtn.onClick.AddListener(() =>
