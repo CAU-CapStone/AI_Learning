@@ -10,6 +10,9 @@ public class Quiz1 : MonoBehaviour
 
     public event Action OnQuizClear;
 
+    public Camera playerCamera;
+    public Camera puzzleCamera;
+
     void Update()
     {
         if(smallQuizBasket.isFull() && largeQuizBasket.isFull())
@@ -23,6 +26,9 @@ public class Quiz1 : MonoBehaviour
 
     public void startQuiz()
     {
+        playerCamera.enabled = false;
+        puzzleCamera.enabled = true;
+
         gameObject.SetActive(true);
     }
 }

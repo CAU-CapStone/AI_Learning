@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectDragAndDrop : MonoBehaviour
 {
-    private Camera mainCamera;
+    public Camera puzzleCamera;
     private GameObject selectedObject;
     private bool isDragging = false;
     private Vector3 offset;
@@ -19,7 +19,7 @@ public class ObjectDragAndDrop : MonoBehaviour
 
     void Start()
     {
-        mainCamera = Camera.main;
+        puzzleCamera = Camera.main;
     }
 
 
@@ -28,7 +28,7 @@ public class ObjectDragAndDrop : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = puzzleCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, dragLayerMask))
@@ -52,7 +52,7 @@ public class ObjectDragAndDrop : MonoBehaviour
 
         if (isDragging)
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = puzzleCamera.ScreenPointToRay(Input.mousePosition);
             float distance;
 
             if (dragPlane.Raycast(ray, out distance))

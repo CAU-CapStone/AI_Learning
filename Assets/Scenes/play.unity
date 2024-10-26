@@ -20828,6 +20828,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 714133859384941806, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 522811754}
+    - target: {fileID: 714133859384941806, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+      propertyPath: puzzleCamera
+      value: 
+      objectReference: {fileID: 1929925294}
+    - target: {fileID: 2342101392606913663, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+      propertyPath: puzzleCamera
+      value: 
+      objectReference: {fileID: 1929925294}
+    - target: {fileID: 2665687698517619127, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+      propertyPath: m_Name
+      value: Puzzle Camera
+      objectReference: {fileID: 0}
     - target: {fileID: 2676082139336172246, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -20868,15 +20884,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5248763773469348531, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+      propertyPath: m_Depth
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248763773469348531, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925126082346787765, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+      propertyPath: puzzleCamera
+      value: 
+      objectReference: {fileID: 1929925294}
     - target: {fileID: 6677074665980763611, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
       propertyPath: m_Name
       value: Quiz
       objectReference: {fileID: 0}
+    - target: {fileID: 7671772839794244676, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 522811754}
+    - target: {fileID: 7671772839794244676, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+      propertyPath: puzzleCamera
+      value: 
+      objectReference: {fileID: 1929925294}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+--- !u!20 &1929925294 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5248763773469348531, guid: dcff1d9561ae49641b4464b72189c1d8, type: 3}
+  m_PrefabInstance: {fileID: 1929925293}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1933863904
 PrefabInstance:
   m_ObjectHideFlags: 0
