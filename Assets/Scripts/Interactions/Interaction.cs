@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    public void Activate()
+    public virtual void Activate()
     {
         Debug.Log(gameObject.name + " activated");
     }
