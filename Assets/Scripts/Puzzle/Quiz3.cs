@@ -3,27 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Quiz1 : MonoBehaviour, IQuiz
+public class Quiz3 : MonoBehaviour, IQuiz
 {
-    public QuizBasket smallQuizBasket;
-    public QuizBasket largeQuizBasket;
-
-
     public event Action OnQuizClear;
 
     public Camera playerCamera;
     public Camera puzzleCamera;
-
-    void Update()
-    {
-        if(smallQuizBasket.isFull() && largeQuizBasket.isFull())
-        {
-            Debug.Log("Quiz Clear");
-            gameObject.SetActive(false);
-            OnQuizClear?.Invoke();
-        }
-    }
-
 
     public void startQuiz()
     {
@@ -31,5 +16,17 @@ public class Quiz1 : MonoBehaviour, IQuiz
         puzzleCamera.enabled = true;
 
         gameObject.SetActive(true);
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
