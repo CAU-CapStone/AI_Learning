@@ -18,15 +18,9 @@ public class Quiz3 : MonoBehaviour, IQuiz
         gameObject.SetActive(true);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void endQuiz()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        gameObject.SetActive(false);
+        OnQuizClear?.Invoke();
     }
 }
