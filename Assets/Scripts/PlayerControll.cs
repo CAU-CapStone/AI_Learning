@@ -15,12 +15,14 @@ public class PlayerControll : MonoBehaviour
     private Vector3 lookDirection = Vector3.zero;
 
     private Player _player;
+    private Animator _animator;
     
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         _player = GetComponent<Player>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -43,12 +45,14 @@ public class PlayerControll : MonoBehaviour
     {
         Vector2 value2 = value.Get<Vector2>();
         //움직일때는 커서 보이지 않게 하기
-        if (value2.magnitude > 0)
+        if (value2 != Vector2.zero)
         {
+            _animator.SetBool("isWalking", true);
             Cursor.visible = false;
         }
         else
         {
+            _animator.SetBool("isWalking", false);
             Cursor.visible = true;
         }
         moveDirection = value2;
