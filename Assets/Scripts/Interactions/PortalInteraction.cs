@@ -14,7 +14,7 @@ public class PortalInteraction : Interaction
             return;
         }
 
-        if (name.Equals("House3Trigger") && !GameManager.Instance.isClearPuzzle2)
+        if (name.Equals("House3Trigger"))
         {
             DialogueManager.Instance.SetDialogue(8, 8);
             return;
@@ -26,6 +26,6 @@ public class PortalInteraction : Interaction
             return;
         }
         
-        GameManager.Instance.SetPlayerLocation(destPortal.position, destPortal.rotation);
+        GameManager.Instance.SetPlayerLocation(destPortal);
     }
 }

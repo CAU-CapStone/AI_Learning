@@ -21,6 +21,9 @@ public class LetterControl : MonoBehaviour
 
     void StartLetterDialogue()
     {
-        DialogueManager.Instance.SetDialogue(5, 7);
+        if (!GameManager.Instance.isClearPuzzle1)
+        {
+            DialogueManager.Instance.SetDialogue(5, 7);
+        }
     }
 }

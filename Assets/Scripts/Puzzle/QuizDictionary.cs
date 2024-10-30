@@ -8,7 +8,7 @@ public class QuizDictionary : MonoBehaviour
 
     private Dictionary<string, IQuiz> quizDictionary = new Dictionary<string, IQuiz>();
 
-    [Header("ÄûÁî ¿ÀºêÁ§Æ®")]
+    [Header("í€´ì¦ˆ ì˜¤ë¸Œì íŠ¸")]
     public GameObject quiz1;
     public GameObject quiz2;
     public GameObject quiz3;
