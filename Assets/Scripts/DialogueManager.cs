@@ -22,7 +22,6 @@ public class DialogueManager : MonoBehaviour
     private int nowEndDialogueId;
 
     public bool isDialogue = false;
-    private AudioSource _nextTextSound;
     
     private void Awake()
     {
@@ -32,7 +31,6 @@ public class DialogueManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             
             canvasDialogue = GetComponentInChildren<Canvas>();
-            _nextTextSound = GetComponent<AudioSource>();
             speakerText = canvasDialogue.GetComponentsInChildren<TextMeshProUGUI>()[0];
             dialogueText = canvasDialogue.GetComponentsInChildren<TextMeshProUGUI>()[1];
             canvasDialogue.enabled = false;
@@ -59,7 +57,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ShowNextDialogue()
     {
-        _nextTextSound.Play();
+        SoundManager.Instance.PlaySoundOneShot("DialogueButtonSound");
         if (nowDialogueId <= nowEndDialogueId)
         {
             speakerText.text = dialogues.dialogues[nowDialogueId].speaker;

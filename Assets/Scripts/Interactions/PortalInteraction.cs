@@ -25,7 +25,7 @@ public class PortalInteraction : Interaction
             DialogueManager.Instance.SetDialogue(8, 8);
             return;
         }
-        
+        SoundManager.Instance.PlaySoundOneShot("DoorOpenSound");
         GameManager.Instance.SetPlayerLocation(destPortal.position, destPortal.rotation);
     }
 }

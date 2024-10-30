@@ -67,6 +67,10 @@ public class PlayerControll : MonoBehaviour
     
     void OnInteract()
     {
+        if(DialogueManager.Instance.isDialogue)
+        {
+            return;
+        }
         Transform t = _player._currentTrigger;
         if (t != null)
         {
