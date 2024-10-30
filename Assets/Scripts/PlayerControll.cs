@@ -26,23 +26,41 @@ public class PlayerControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.isAllowedToMove == false)
+        {
+            return;
+        }
         controller.transform.Rotate(lookDirection);
         lookDirection = Vector3.zero;
         
         var move = transform.right * moveDirection.x + transform.forward * moveDirection.y;
         controller.Move(speed * Time.deltaTime * move);
         
-        SetCameraPosition();
+        //SetCameraPosition();
     }
 
     void OnMove(InputValue value)
     {
         Vector2 value2 = value.Get<Vector2>();
+        //움직일때는 커서 보이지 않게 하기
+        if (value2.magnitude > 0)
+        {
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.visible = true;
+        }
         moveDirection = value2;
     }
 
     void OnRoll(InputValue value)
     {
+        //대화 중에는 움직이기 방지
+        if(DialogueManager.Instance.isDialogue)
+        {
+            return;
+        }
         Vector2 value2 = value.Get<Vector2>();
         lookDirection += new Vector3(0, value2.x, 0) * rotationSpeed;
     }
@@ -65,6 +83,16 @@ public class PlayerControll : MonoBehaviour
         }
     }
 
+    void OnDialogue(InputValue value)
+    {
+        if(DialogueManager.Instance.isDialogue)
+        {
+            DialogueManager.Instance.ShowNextDialogue();
+        }
+    }
+
+    //카메라 위치 조정
+    Vector3 _delta = new Vector3(0.0f, 5.0f, -1.5f);
     void SetCameraPosition()
     {
         camera.transform.position = transform.position - transform.forward * 5 + transform.up * 1.5f;

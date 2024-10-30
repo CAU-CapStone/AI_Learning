@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public bool isClearPuzzle1 = false;
     public bool isClearPuzzle2 = false;
     
+    public bool isAllowedToMove = true;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -36,5 +38,10 @@ public class GameManager : MonoBehaviour
         player.transform.position = position;
         player.transform.rotation = rotation;
         player.SetActive(true);
+    }
+    
+    public void SetPlayerAllowedToMove(bool isAllowed)
+    {
+        isAllowedToMove = isAllowed;
     }
 }

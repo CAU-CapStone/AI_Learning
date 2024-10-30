@@ -10,12 +10,14 @@ public class LetterControl : MonoBehaviour
     
     void Start()
     {
+        GameManager.Instance.SetPlayerAllowedToMove(false);
         closeButton.onClick.AddListener(CloseThis);
         closeButton.onClick.AddListener(StartLetterDialogue);
     }
 
     void CloseThis()
     {
+        GameManager.Instance.SetPlayerAllowedToMove(true);
         this.GameObject().SetActive(false);
     }
 

@@ -20,6 +20,8 @@ public class DialogueManager : MonoBehaviour
 
     private int nowDialogueId;
     private int nowEndDialogueId;
+
+    public bool isDialogue = false;
     
     private void Awake()
     {
@@ -45,6 +47,8 @@ public class DialogueManager : MonoBehaviour
     
     public void SetDialogue(int startId, int endId)
     {
+        GameManager.Instance.SetPlayerAllowedToMove(false);
+        isDialogue = true;
         nowDialogueId = startId;
         nowEndDialogueId = endId;
         canvasDialogue.enabled = true;
@@ -57,11 +61,12 @@ public class DialogueManager : MonoBehaviour
         {
             speakerText.text = dialogues.dialogues[nowDialogueId].speaker;
             dialogueText.text = dialogues.dialogues[nowDialogueId].text;
-
             nowDialogueId++;
         }
         else
         {
+            GameManager.Instance.SetPlayerAllowedToMove(true);
+            isDialogue = false;
             canvasDialogue.enabled = false;
             onDialogueEnd.Invoke();
         }
