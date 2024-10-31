@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        SetPlayerLocation(startPosition.position,false);
+        SetPlayerLocation(startPosition,false);
     }
     
     [SerializeField] CinemachineVirtualCamera virtualCamera;
@@ -63,11 +63,11 @@ public class GameManager : MonoBehaviour
         isAllowedToMove = isAllowed;
     }
 
-    public static void SetGameObjectLocation(GameObject obj, Transform tf,bool isFade)
+    public void SetGameObjectLocation(GameObject obj, Transform tf,bool isFade = false)
     {
 	    if (isFade)
 	    {
-	        StartCoroutine(FadeAndTeleport(GameObject obj, Transform tfn));
+	        StartCoroutine(FadeAndTeleport(obj, tf));
 	    }
 	    else
         {
@@ -77,17 +77,17 @@ public class GameManager : MonoBehaviour
         	obj.SetActive(true);
         }
     }
-    private IEnumerator FadeAndTeleport(Vector3 position, Quaternion rotation)
+    private IEnumerator FadeAndTeleport(GameObject obj, Transform tf)
     {
         isAllowedToMove = false;
         // 텔레포트 동안 화면 어둠게 하기
         yield return StartCoroutine(Fade(true));
-        player.SetActive(false);
-        player.transform.position = position;
-        player.transform.rotation = rotation;
-        player.SetActive(true);
+        obj.SetActive(false);
+        obj.transform.position = tf.position;
+        obj.transform.rotation = tf.rotation;
+        obj.SetActive(true);
         // 다시 화면 밝게 하기
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.70f);
         yield return StartCoroutine(Fade(false));
         isAllowedToMove = true;
         
@@ -95,8 +95,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Fade(bool isFadeIn)
     {
-        float portalFadeDuration = isFadeIn?0.4f:1.2f; // Time to fade in/out
-        fadeImage.enabled = true;
+        float portalFadeDuration = isFadeIn?0.4f:0.4f; // Time to fade in/out
+        fadeImage.gameObject.SetActive(true);
         float targetAlpha = isFadeIn ? 1:0;
         float startAlpha = isFadeIn ? 0:1;
         Color color = fadeImage.color;
@@ -114,11 +114,9 @@ public class GameManager : MonoBehaviour
         fadeImage.color = color;
         if (!isFadeIn)
         {
-            fadeImage.enabled = false;
+            fadeImage.gameObject.SetActive(false);
         }
     }
-    
-    GameObject obj, Transform tf
 
     public void SetMainCamera()
     {

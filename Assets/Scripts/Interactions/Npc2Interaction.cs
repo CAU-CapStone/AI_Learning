@@ -53,7 +53,7 @@ public class Npc2Interaction : Interaction
     {
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndPuzzle2Dialogue);
         
-        GameManager.SetGameObjectLocation(GameManager.Instance.npc2, GameManager.Instance.house4Npc2Position);
+        GameManager.Instance.SetGameObjectLocation(GameManager.Instance.npc2, GameManager.Instance.house4Npc2Position);
     }
 
     private void StartPuzzle3()
