@@ -7,12 +7,29 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    
+    [Header("Player")]
     public GameObject player;
+    
+    [Header("NPCs")]
+    public GameObject npc1;
+    public GameObject npc2;
+    public GameObject npc3;
+    public GameObject npc4;
+    
+    [Header("positions")]
     public Transform startPosition;
-
+    public Transform house4Npc2Position;
+    
+    [Header("Cameras")]
+    public Camera playerCamera;
+    public Camera puzzleCamera;
+    
+    [Header("Game States")]
     public bool isReadBook = false;
     public bool isClearPuzzle1 = false;
     public bool isClearPuzzle2 = false;
+    public bool isClearPuzzle3 = false;
     
     public bool isAllowedToMove = true;
     
@@ -31,32 +48,33 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        SetPlayerLocation(startPosition.position, startPosition.rotation,false);
+        SetPlayerLocation(startPosition.position,false);
+    }
+    
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
+    [SerializeField] Image fadeImage;
+    public void SetPlayerLocation(Transform tf, bool isFade = false)
+    {
+        SetGameObjectLocation(player, tf,isFade);
     }
     
     public void SetPlayerAllowedToMove(bool isAllowed)
     {
         isAllowedToMove = isAllowed;
     }
-    
-    
-    
-    [SerializeField] CinemachineVirtualCamera virtualCamera;
-    [SerializeField] Image fadeImage;
-    public void SetPlayerLocation(Vector3 position, Quaternion rotation,bool isFade = true)
+
+    public static void SetGameObjectLocation(GameObject obj, Transform tf,bool isFade)
     {
-        if (isFade)
+	    if (isFade)
+	    {
+	        StartCoroutine(FadeAndTeleport(GameObject obj, Transform tfn));
+	    }
+	    else
         {
-            StartCoroutine(FadeAndTeleport(position, rotation));
-        }
-        else
-        {
-            isAllowedToMove = false;
-            player.SetActive(false);
-            player.transform.position = position;
-            player.transform.rotation = rotation;
-            player.SetActive(true);
-            isAllowedToMove = true;
+            obj.SetActive(false);
+        	obj.transform.position = tf.position;
+       		obj.transform.rotation = tf.rotation;
+        	obj.SetActive(true);
         }
     }
     private IEnumerator FadeAndTeleport(Vector3 position, Quaternion rotation)
@@ -98,5 +116,13 @@ public class GameManager : MonoBehaviour
         {
             fadeImage.enabled = false;
         }
+    }
+    
+    GameObject obj, Transform tf
+
+    public void SetMainCamera()
+    {
+        puzzleCamera.enabled = false;
+        playerCamera.enabled = true;
     }
 }

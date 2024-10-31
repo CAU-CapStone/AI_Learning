@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Npc1Interaction : Interaction
 {
-    public Quiz1 quiz1;
-    
-    public Camera playerCamera;
-    public Camera puzzleCamera;
+    private IQuiz quiz1;
 
-    public GameObject npc2;
-    public GameObject npc2Trigger;
+    void Start()
+    {
+        quiz1 = QuizDictionary.Instance.GetQuiz("Quiz1");
+    }
     
     public override void Activate()
     {
@@ -19,9 +18,13 @@ public class Npc1Interaction : Interaction
             DialogueManager.Instance.onDialogueEnd.AddListener(StartPuzzle);
             DialogueManager.Instance.SetDialogue(2, 4);
         }
-        else
+        else if (!GameManager.Instance.isClearPuzzle2)
         {
             DialogueManager.Instance.SetDialogue(14, 14);
+        }
+        else
+        {
+            DialogueManager.Instance.SetDialogue(24, 24);
         }
     }
 
@@ -37,8 +40,7 @@ public class Npc1Interaction : Interaction
     {
         quiz1.OnQuizClear -= EndPuzzle;
         GameManager.Instance.isClearPuzzle1 = true;
-        puzzleCamera.enabled = false;
-        playerCamera.enabled = true;
+        GameManager.Instance.SetMainCamera();
         DialogueManager.Instance.onDialogueEnd.AddListener(EndNpc1Dialogue);
         DialogueManager.Instance.SetDialogue(9, 10);
     }
@@ -46,8 +48,7 @@ public class Npc1Interaction : Interaction
     private void EndNpc1Dialogue()
     {
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndNpc1Dialogue);
-        npc2.SetActive(true);
-        npc2Trigger.SetActive(true);
+        GameManager.Instance.npc2.SetActive(true);
         DialogueManager.Instance.SetDialogue(11, 13);
     }
 }
