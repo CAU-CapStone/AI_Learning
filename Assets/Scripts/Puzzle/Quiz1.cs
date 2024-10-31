@@ -21,6 +21,9 @@ public class Quiz1 : MonoBehaviour, IQuiz
             Debug.Log("Quiz Clear");
             gameObject.SetActive(false);
             OnQuizClear?.Invoke();
+            
+            //퀴즈 클리어시 사운드 효과
+            SoundManager.Instance.PlaySoundOneShot("SuccessSound", 0.4f);
         }
     }
 

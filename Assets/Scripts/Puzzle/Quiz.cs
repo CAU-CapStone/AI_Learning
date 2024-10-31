@@ -7,7 +7,7 @@ public class Quiz : MonoBehaviour
     public TableItemSpawner tableItemSpawner;
     public QuizBasket smallItemBasket;
     public QuizBasket largeItemBasket;
-    public int itemCount=15;    //TableItemSpawnerÀÇ À§Ä¡°³¼öº¸´Ù ¸¹À¸¸é ¹«½ÃµÊ
+    public int itemCount=15;    //TableItemSpawnerì˜ ìœ„ì¹˜ê°œìˆ˜ë³´ë‹¤ ë§ìœ¼ë©´ ë¬´ì‹œë¨
     private void OnEnable()
     {
         SpawnItems();

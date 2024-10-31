@@ -78,7 +78,8 @@ public class ObjectDragAndDrop : MonoBehaviour
                     selectedPosition.y = 0.7f;
                     selectedObject.transform.position = selectedPosition;
                     selectedObject.layer = LayerMask.GetMask("Default");
-                    //Debug.Log("µ¹¸æÀÌ¸¦ ÀÛÀº ¹Ù±¸´Ï¿¡ ³Ö¾ú½À´Ï´Ù!");
+                    //Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
+                    SoundManager.Instance.PlaySoundOneShot("SmallStoneSound", 0.5f);
                 }
                 else if(largeBasketDistance < 2.0f && largeBasket.TryAddItem(selectedObject))
                 {
@@ -86,7 +87,8 @@ public class ObjectDragAndDrop : MonoBehaviour
                     selectedPosition.y = 0.7f;
                     selectedObject.transform.position = selectedPosition;
                     selectedObject.layer = LayerMask.GetMask("Default");
-                    //Debug.Log("µ¹¸æÀÌ¸¦ Å« ¹Ù±¸´Ï¿¡ ³Ö¾ú½À´Ï´Ù!");
+                    //Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ Å« ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
+                    SoundManager.Instance.PlaySoundOneShot("LargeStoneSound", 0.5f);
                 }
                 else
                 {
