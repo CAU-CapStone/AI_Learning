@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectDragAndDrop : MonoBehaviour
+public class ItemDragAndDrop : MonoBehaviour
 {
-    public Camera puzzleCamera;
     private GameObject selectedObject;
     private bool isDragging = false;
     private Vector3 offset;
@@ -12,23 +11,25 @@ public class ObjectDragAndDrop : MonoBehaviour
 
     public LayerMask dragLayerMask;
 
-    public QuizBasket smallBasket;
-    public QuizBasket largeBasket;
+    //public Area animalArea;
+    //public Area toolArea;
+
+    public List<Area> AreaList = new List<Area>();
 
     private Plane dragPlane;
 
     void Start()
     {
-        puzzleCamera = Camera.main;
     }
 
 
     void Update()
     {
-        
+
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = puzzleCamera.ScreenPointToRay(Input.mousePosition);
+            
+            Ray ray = CameraManager.Instance.puzzleCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, dragLayerMask))
@@ -41,7 +42,7 @@ public class ObjectDragAndDrop : MonoBehaviour
                     dragPlane = new Plane(Vector3.up, selectedObject.transform.position);
 
                     float distance;
-                    if(dragPlane.Raycast(ray,out distance))
+                    if (dragPlane.Raycast(ray, out distance))
                     {
                         Vector3 hitPoint = ray.GetPoint(distance);
                         offset = selectedObject.transform.position - hitPoint;
@@ -52,13 +53,13 @@ public class ObjectDragAndDrop : MonoBehaviour
 
         if (isDragging)
         {
-            Ray ray = puzzleCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = CameraManager.Instance.puzzleCamera.ScreenPointToRay(Input.mousePosition);
             float distance;
 
             if (dragPlane.Raycast(ray, out distance))
             {
                 Vector3 hitPoint = ray.GetPoint(distance);
-                Vector3 newPosition = hitPoint- offset;
+                Vector3 newPosition = hitPoint - offset;
 
                 newPosition.y = selectedObject.transform.position.y;
                 selectedObject.transform.position = newPosition;
@@ -68,23 +69,29 @@ public class ObjectDragAndDrop : MonoBehaviour
             {
                 isDragging = false;
 
-                
-                float smallBasketDistance = Vector3.Distance(selectedObject.transform.position, smallBasket.transform.position);
-                float largeBasketDistance = Vector3.Distance(selectedObject.transform.position, largeBasket.transform.position);
-
-                if (smallBasketDistance < 2.0f && smallBasket.TryAddItem(selectedObject))
+                bool outArea = true;
+                foreach(Area area in AreaList)
                 {
-                    Vector3 selectedPosition = selectedObject.transform.position;
-                    selectedPosition.y = 0.7f;
-                    selectedObject.transform.position = selectedPosition;
+                    if(area.TryPlaceObject(selectedObject))
+                    {
+                        selectedObject.layer = LayerMask.GetMask("Default");
+                        outArea= false;
+                    }
+                }
+
+                if(outArea)
+                {
+                    selectedObject.transform.position = initialPosition;
+                }
+
+                /*
+                if (animalArea.TryAddItem(selectedObject))
+                {
                     selectedObject.layer = LayerMask.GetMask("Default");
                     SoundManager.Instance.PlaySoundOneShot("SmallStoneSound", 0.5f);
                 }
-                else if(largeBasketDistance < 2.0f && largeBasket.TryAddItem(selectedObject))
+                else if (toolArea.TryAddItem(selectedObject))
                 {
-                    Vector3 selectedPosition = selectedObject.transform.position;
-                    selectedPosition.y = 0.7f;
-                    selectedObject.transform.position = selectedPosition;
                     selectedObject.layer = LayerMask.GetMask("Default");
                     SoundManager.Instance.PlaySoundOneShot("LargeStoneSound", 0.5f);
                 }
@@ -92,7 +99,7 @@ public class ObjectDragAndDrop : MonoBehaviour
                 {
                     selectedObject.transform.position = initialPosition;
                 }
-                
+                */
 
 
                 selectedObject = null;
@@ -101,4 +108,3 @@ public class ObjectDragAndDrop : MonoBehaviour
     }
 
 }
-
