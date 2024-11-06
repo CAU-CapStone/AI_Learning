@@ -19,19 +19,29 @@ public class Area : MonoBehaviour
     private float zSpacing;
     private int placedObjects = 0;
 
-    private void Start()
-    {
-        row = 8; column = 4;
-        currentPosition = topLeft.position;
 
+    private void Awake()
+    {
+        currentPosition = topLeft.position;
         xSpacing = Mathf.Abs(topLeft.position.x - bottomRight.position.x) / (column - 1);
         zSpacing = Mathf.Abs(topLeft.position.z - bottomRight.position.z) / (row - 1);
+    }
+    private void Start()
+    {
 
+
+    }
+
+    public void init()
+    {
+        currentPosition = topLeft.position;
+        xSpacing = Mathf.Abs(topLeft.position.x - bottomRight.position.x) / (column - 1);
+        zSpacing = Mathf.Abs(topLeft.position.z - bottomRight.position.z) / (row - 1);
     }
 
     public bool TryPlaceObject(GameObject selectedObject)
     {
-        if(inArea(selectedObject.transform)&&isCorrectTag(selectedObject)&&placedObjects<row*column)
+        if (inArea(selectedObject.transform) && isCorrectTag(selectedObject) && placedObjects < row * column)
         {
             placedObjectList.Add(selectedObject);
             placedObjects++;
@@ -40,6 +50,17 @@ public class Area : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void placeObject(GameObject previousObject)
+    {
+        if (isCorrectTag(previousObject) && placedObjects < row * column)
+        {
+            placedObjectList.Add(previousObject);
+            placedObjects++;
+            previousObject.transform.position = currentPosition;
+            UpdateNextPosition();
+        }
     }
 
     private bool inArea(Transform selectedObject)

@@ -7,8 +7,7 @@ public class DTQuiz1 : MonoBehaviour, IQuiz
 {
     public event Action OnQuizClear;
     public GameObject items;
-    public Area animalArea;
-    public Area toolArea;
+    public List<Area> areaList = new List<Area>();
     private int itemCount;
     public void startQuiz()
     {
@@ -31,13 +30,18 @@ public class DTQuiz1 : MonoBehaviour, IQuiz
 
     private void Update()
     {
-        int animalAreaCount = animalArea.placedObjectList.Count;
-        int toolAreaCount = toolArea.placedObjectList.Count;
+        int placedObjectSum = 0;
+        foreach (Area area in areaList)
+        {
+            placedObjectSum += area.placedObjectList.Count;
+        }
 
-        if(itemCount == animalAreaCount + toolAreaCount)
+        if (itemCount == placedObjectSum)
         {
             endQuiz();
         }
+
+        
     }
 
 

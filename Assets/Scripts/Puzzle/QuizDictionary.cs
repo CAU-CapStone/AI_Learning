@@ -13,6 +13,7 @@ public class QuizDictionary : MonoBehaviour
     public GameObject quiz2;
     public GameObject quiz3;
     public GameObject dtquiz1;
+    public GameObject dtquiz2;
 
     void Awake()
     {
@@ -32,6 +33,7 @@ public class QuizDictionary : MonoBehaviour
         if (quiz2 != null) quizDictionary["Quiz2"] = quiz2.GetComponent<IQuiz>();
         if (quiz3 != null) quizDictionary["Quiz3"] = quiz3.GetComponent<IQuiz>();
         if (dtquiz1 != null) quizDictionary["DTQuiz1"] = dtquiz1.GetComponent<IQuiz>();
+        if (dtquiz2 != null) quizDictionary["DTQuiz2"] = dtquiz2.GetComponent<IQuiz>();
     }
 
     public IQuiz GetQuiz(string quizName)
