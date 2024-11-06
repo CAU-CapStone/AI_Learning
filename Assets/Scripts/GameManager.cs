@@ -16,10 +16,12 @@ public class GameManager : MonoBehaviour
     public GameObject npc2;
     public GameObject npc3;
     public GameObject npc4;
+    public GameObject dt_pasture;
     
     [Header("positions")]
     public Transform startPosition;
     public Transform house4Npc2Position;
+    public Transform dt_pastureNpc1Position;
     
     [Header("Cameras")]
     public Camera playerCamera;
@@ -30,6 +32,9 @@ public class GameManager : MonoBehaviour
     public bool isClearPuzzle1 = false;
     public bool isClearPuzzle2 = false;
     public bool isClearPuzzle3 = false;
+    public bool dt_isClearPuzzle1 = false;
+    public bool dt_isEndPuzzle1Dialogue = false;
+    public bool dt_isClearPuzzle2 = false;
     
     public bool isAllowedToMove = true;
     

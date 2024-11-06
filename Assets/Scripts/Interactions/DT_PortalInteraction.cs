@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PortalInteraction : Interaction
+public class DT_PortalInteraction : Interaction
 {
     public Transform destPortal;
     
@@ -14,17 +14,12 @@ public class PortalInteraction : Interaction
             return;
         }
 
-        if (name.Equals("House3Trigger"))
+        if (name.Equals("House3Trigger") || name.Equals("House4Trigger"))
         {
             DialogueManager.Instance.SetDialogue(8, 8);
             return;
         }
         
-        if (name.Equals("House4Trigger") && !GameManager.Instance.isClearPuzzle2)
-        {
-            DialogueManager.Instance.SetDialogue(8, 8);
-            return;
-        }
         SoundManager.Instance.PlaySoundOneShot("DoorOpenSound");
         GameManager.Instance.SetPlayerLocation(destPortal,true);
     }
