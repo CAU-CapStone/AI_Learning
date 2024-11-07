@@ -13,6 +13,7 @@ public class DT_PastureInteraction : Interaction
     
     public override void Activate()
     {
+        base.Activate();
         if (GameManager.Instance.dt_isClearPuzzle1 && !GameManager.Instance.dt_isClearPuzzle2)
         {
             DialogueManager.Instance.onDialogueEnd.AddListener(EndActivate);

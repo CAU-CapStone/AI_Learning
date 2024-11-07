@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +17,12 @@ public class PlayerControll : MonoBehaviour
 
     private Player _player;
     private Animator _animator;
+    TMP_Text _interactionText;
+    
+    void Awake()
+    {
+        _interactionText = GameObject.Find("InteractionText").GetComponentInChildren<TMP_Text>();
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -43,7 +50,13 @@ public class PlayerControll : MonoBehaviour
 
     void OnMove(InputValue value)
     {
+        
         Vector2 value2 = value.Get<Vector2>();
+        //대화 중에는 움직이기 방지
+        if(DialogueManager.Instance.isDialogue || !GameManager.Instance.isAllowedToMove)
+        {
+            value2 = Vector2.zero;
+        }
         //움직일때는 커서 보이지 않게 하기
         if (value2 != Vector2.zero)
         {
@@ -61,7 +74,7 @@ public class PlayerControll : MonoBehaviour
     void OnRoll(InputValue value)
     {
         //대화 중에는 움직이기 방지
-        if(DialogueManager.Instance.isDialogue)
+        if(DialogueManager.Instance.isDialogue || !GameManager.Instance.isAllowedToMove)
         {
             return;
         }
@@ -80,11 +93,14 @@ public class PlayerControll : MonoBehaviour
         {
             if(t.CompareTag("NPC"))
             {
+                DialogueManager.Instance.npc = t.parent;
+                _interactionText.text = "";
                 Debug.Log("Interacting with NPC");
                 t.GetComponent<Interaction>().Activate();
             }
             else if(t.CompareTag("Portal"))
             {
+                _interactionText.text = "";
                 Debug.Log("Interacting with Portal");
                 t.GetComponent<Interaction>().Activate();
             }

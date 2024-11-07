@@ -36,10 +36,11 @@ public class GameManager : MonoBehaviour
     public bool dt_isEndPuzzle1Dialogue = false;
     public bool dt_isClearPuzzle2 = false;
     
-    public bool isAllowedToMove = true;
+    public bool isAllowedToMove = false;
     
     private void Awake()
     {
+        isAllowedToMove = false;
         if (Instance == null)
         {
             Instance = this;
@@ -51,8 +52,9 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    void Start()
+    public void StartGame()
     {
+        isAllowedToMove = true;
         SetPlayerLocation(startPosition,false);
     }
     
@@ -71,7 +73,8 @@ public class GameManager : MonoBehaviour
     public void SetGameObjectLocation(GameObject obj, Transform tf,bool isFade = false)
     {
 	    if (isFade)
-	    {
+        {
+            isAllowedToMove = false;
 	        StartCoroutine(FadeAndTeleport(obj, tf));
 	    }
 	    else
@@ -95,14 +98,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.70f);
         yield return StartCoroutine(Fade(false));
         isAllowedToMove = true;
-        
     }
 
     private IEnumerator Fade(bool isFadeIn)
     {
         float portalFadeDuration = isFadeIn?0.4f:0.4f; // Time to fade in/out
         fadeImage.gameObject.SetActive(true);
-        float targetAlpha = isFadeIn ? 1:0;
+        float targetAlpha = isFadeIn ? 1:0.1f;
         float startAlpha = isFadeIn ? 0:1;
         Color color = fadeImage.color;
         float timer = 0;

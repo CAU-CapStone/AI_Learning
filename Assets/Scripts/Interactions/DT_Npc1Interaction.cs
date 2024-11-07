@@ -13,6 +13,7 @@ public class DT_Npc1Interaction : Interaction
     
     public override void Activate()
     {
+        base.Activate();
         if (!GameManager.Instance.dt_isClearPuzzle1)
         {
             DialogueManager.Instance.onDialogueEnd.AddListener(StartPuzzle);
@@ -48,6 +49,7 @@ public class DT_Npc1Interaction : Interaction
     private void EndNpc1Dialogue()
     {
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndNpc1Dialogue);
+        DialogueManager.Instance.npc = null;
     }
 }
 

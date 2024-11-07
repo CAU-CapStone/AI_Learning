@@ -8,6 +8,7 @@ public class DT_PortalInteraction : Interaction
     
     public override void Activate()
     {
+        base.Activate();
         if (name.Equals("DoorTrigger1") && !GameManager.Instance.isReadBook)
         {
             DialogueManager.Instance.SetDialogue(0, 0);

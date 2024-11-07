@@ -5,6 +5,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using Debug = UnityEngine.Debug;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class DialogueManager : MonoBehaviour
 
     private int nowDialogueId;
     private int nowEndDialogueId;
+
+    public Transform npc;
 
     public bool isDialogue = false;
     
@@ -57,6 +60,16 @@ public class DialogueManager : MonoBehaviour
 
     public void ShowNextDialogue()
     {
+        //만약 animator가 있는 npc면 interaction 실행
+        if (npc != null)
+        {
+            Animator anim = npc.GetComponentInChildren<Animator>();
+            if (anim != null)
+            {
+                Debug.Log("Play anim");
+                anim.SetTrigger("Interaction");
+            }
+        }
         SoundManager.Instance.PlaySoundOneShot("DialogueButtonSound");
         if (nowDialogueId <= nowEndDialogueId)
         {

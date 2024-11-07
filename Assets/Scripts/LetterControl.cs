@@ -4,19 +4,20 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LetterControl : MonoBehaviour
+public class LetterControl : Interaction
 {
     public Button closeButton;
     
     void Start()
     {
         GameManager.Instance.SetPlayerAllowedToMove(false);
-        closeButton.onClick.AddListener(CloseThis);
+        closeButton.onClick.AddListener(Activate);
         closeButton.onClick.AddListener(StartLetterDialogue);
     }
 
-    void CloseThis()
+    public override void Activate()
     {
+        base.Activate();
         GameManager.Instance.SetPlayerAllowedToMove(true);
         this.GameObject().SetActive(false);
     }
