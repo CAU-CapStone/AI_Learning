@@ -43,6 +43,8 @@ public class DTQuiz2 : MonoBehaviour, IQuiz
 
     private void endQuiz()
     {
+        //퀴즈 클리어시 사운드 효과
+        SoundManager.Instance.PlaySoundOneShot("SuccessSound", 0.4f);
         gameObject.SetActive(false);
         OnQuizClear?.Invoke();
     }
