@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class DT_Npc1Interaction : Interaction
 {
     private IQuiz dt_quiz1;

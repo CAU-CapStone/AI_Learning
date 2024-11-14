@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     public bool isClearPuzzle1 = false;
     public bool isClearPuzzle2 = false;
     public bool isClearPuzzle3 = false;
+    public bool isClearPuzzle4 = false;
+    public bool isClearPuzzle5 = false;
     public bool dt_isClearPuzzle1 = false;
     public bool dt_isEndPuzzle1Dialogue = false;
     public bool dt_isClearPuzzle2 = false;
