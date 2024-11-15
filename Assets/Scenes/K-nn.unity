@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 59573b088aaea0442bf29e0a0e9d1339, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -17863,15 +17863,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1446343279205608216, guid: 0ece04009bd8ed9418f978134da31619, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1446343279205608216, guid: 0ece04009bd8ed9418f978134da31619, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1446343279205608216, guid: 0ece04009bd8ed9418f978134da31619, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1446343279205608216, guid: 0ece04009bd8ed9418f978134da31619, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -22953,6 +22953,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1418883676742063957, guid: acadb201913fc8747a7020743c925f9f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.84999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418883676742063957, guid: acadb201913fc8747a7020743c925f9f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418883676742063957, guid: acadb201913fc8747a7020743c925f9f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -22982,11 +22990,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1418883676742063957, guid: acadb201913fc8747a7020743c925f9f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 309.76022
       objectReference: {fileID: 0}
     - target: {fileID: 1418883676742063957, guid: acadb201913fc8747a7020743c925f9f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 121.03
       objectReference: {fileID: 0}
     - target: {fileID: 1418883676742063957, guid: acadb201913fc8747a7020743c925f9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
