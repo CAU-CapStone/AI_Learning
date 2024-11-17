@@ -13,12 +13,9 @@ public class Npc4Interaction : Interaction
     {
         if (!GameManager.Instance.isClearPuzzle5)
         {
+            GameManager.Instance.QuestTextSetActive(false);
             DialogueManager.Instance.onDialogueEnd.AddListener(StartQuiz5);
             DialogueManager.Instance.SetDialogue(59, 65);
-        }
-        else
-        {
-            DialogueManager.Instance.SetDialogue(33, 33);
         }
     }
 
@@ -44,6 +41,7 @@ public class Npc4Interaction : Interaction
     private void EndDialogue()
     {
         GameManager.Instance.npc4.SetActive(false);
+        GameManager.Instance.SetQuestText("도울 사람을 찾아보자");
     }
 
     private void FailQuiz5()

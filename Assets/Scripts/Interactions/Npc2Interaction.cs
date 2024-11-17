@@ -13,6 +13,7 @@ public class Npc2Interaction : Interaction
     {
         if (!GameManager.Instance.isClearPuzzle3)
         {
+            GameManager.Instance.QuestTextSetActive(false);
             DialogueManager.Instance.onDialogueEnd.AddListener(StartPuzzle3);
             DialogueManager.Instance.SetDialogue(25, 26);
         }
@@ -42,6 +43,7 @@ public class Npc2Interaction : Interaction
     private void EndPuzzle3Dialogue()
     {
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndPuzzle3Dialogue);
+        GameManager.Instance.SetQuestText("밖으로 나가 도움이 필요한 사람을 찾자");
         GameManager.Instance.npc3.SetActive(true);
         GameManager.Instance.npc4.SetActive(true);
     }

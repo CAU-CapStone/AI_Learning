@@ -11,6 +11,7 @@ public class Npc3Interaction : Interaction
     {
         if (!GameManager.Instance.isClearPuzzle4)
         {
+            GameManager.Instance.QuestTextSetActive(false);
             DialogueManager.Instance.onDialogueEnd.AddListener(StartPuzzle4);
             DialogueManager.Instance.SetDialogue(50, 55);
         }
@@ -34,5 +35,12 @@ public class Npc3Interaction : Interaction
         quiz4.OnQuizClear -= EndPuzzle4;
         GameManager.Instance.SetMainCamera();
         DialogueManager.Instance.SetDialogue(57, 57);
+        DialogueManager.Instance.onDialogueEnd.AddListener(EndDialogue);
+    }
+
+    private void EndDialogue()
+    {
+        DialogueManager.Instance.onDialogueEnd.RemoveListener(EndDialogue);
+        GameManager.Instance.SetQuestText("도울 사람을 찾아보자");
     }
 }

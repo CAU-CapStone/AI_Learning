@@ -24,7 +24,6 @@ public class Quiz3 : MonoBehaviour, IQuiz
         gameObject.SetActive(false);
         GameManager.Instance.magicCircle.gameObject.SetActive(false);
         GameManager.Instance.SetMagicCircleOutPos(new Vector3(79.3f,22f, 50.17f));
-        GameManager.Instance.SetQuestText("밖으로 나가 도움이 필요한 사람을 찾자");
         OnQuizClear?.Invoke();
         //퀴즈 클리어시 사운드 효과
         SoundManager.Instance.PlaySoundOneShot("SuccessSound", 0.4f);

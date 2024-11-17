@@ -54,7 +54,6 @@ public class Quiz5 : MonoBehaviour, IQuiz
     {
         if (!GameManager.Instance.isClearPuzzle4)
         {
-            GameManager.Instance.SetQuestText("다른 도음이 필요한 사람을 찾아보자");
         }
         OnQuizClear?.Invoke();
         //퀴즈 클리어시 사운드 효과
