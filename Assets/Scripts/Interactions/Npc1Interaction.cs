@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Npc1Interaction : Interaction
 {
     private IQuiz quiz1;
@@ -34,6 +36,9 @@ public class Npc1Interaction : Interaction
 
     private void EndPuzzle()
     {
+        GameManager.Instance.SetMagicCirclePos(new Vector3(21.6f,-1.428f, 501.84f));
+        GameManager.Instance.SetMagicCircleOutPos(new Vector3(61.22f,22.2f,27.82f));
+        GameManager.Instance.SetQuestText("바로 옆에 있는 장로님께 말을 걸어보자");
         quiz1.OnQuizClear -= EndPuzzle;
         GameManager.Instance.isClearPuzzle1 = true;
         GameManager.Instance.SetMainCamera();

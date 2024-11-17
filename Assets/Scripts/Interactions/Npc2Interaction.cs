@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Npc2Interaction : Interaction
 {
     private IQuiz quiz2;
@@ -38,6 +40,8 @@ public class Npc2Interaction : Interaction
     private void EndPuzzle2()
     {
         quiz2.OnQuizClear -= EndPuzzle2;
+        GameManager.Instance.SetMagicCirclePos(new Vector3(58.8f,-1.428f, 500.44f));
+        GameManager.Instance.SetQuestText("장로님 댁으로 찾아가자");
         GameManager.Instance.isClearPuzzle2 = true;
         GameManager.Instance.SetMainCamera();
         DialogueManager.Instance.SetDialogue(16, 19);

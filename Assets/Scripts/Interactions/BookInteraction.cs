@@ -8,5 +8,6 @@ public class BookInteraction : Interaction
     {
         letterCanvas.SetActive(true);
         GameManager.Instance.isReadBook = true;
+        GameManager.Instance.QuestTextSetActive(false);
     }
 }

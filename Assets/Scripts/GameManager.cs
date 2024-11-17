@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +40,11 @@ public class GameManager : MonoBehaviour
     public bool dt_isClearPuzzle2 = false;
     
     public bool isAllowedToMove = false;
-    
+
+    public TMP_Text quest;
+    public Transform magicCircle;
+    public Transform magicCircleOut;
+
     private void Awake()
     {
         isAllowedToMove = false;
@@ -52,6 +57,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        StartGame();
+        SetQuestText("책상 위에 편지를 읽어보자");
     }
     
     public void StartGame()
@@ -89,6 +96,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator FadeAndTeleport(GameObject obj, Transform tf)
     {
+        quest.transform.parent.gameObject.SetActive(false);
         isAllowedToMove = false;
         // 텔레포트 동안 화면 어둠게 하기
         yield return StartCoroutine(Fade(true));
@@ -99,6 +107,7 @@ public class GameManager : MonoBehaviour
         // 다시 화면 밝게 하기
         yield return new WaitForSeconds(1.70f);
         yield return StartCoroutine(Fade(false));
+        quest.transform.parent.gameObject.SetActive(true);
         isAllowedToMove = true;
     }
 
@@ -131,5 +140,24 @@ public class GameManager : MonoBehaviour
     {
         puzzleCamera.enabled = false;
         playerCamera.enabled = true;
+    }
+
+    public void SetQuestText(string str)
+    {
+        quest.transform.parent.gameObject.SetActive(true);
+        quest.text = str;
+    }
+    
+    public void QuestTextSetActive(bool b)
+    {
+        quest.transform.parent.gameObject.SetActive(b);
+    }
+    public void SetMagicCirclePos(Vector3 pos)
+    {
+        magicCircle.position = pos;
+    }
+    public void SetMagicCircleOutPos(Vector3 pos)
+    {
+        magicCircleOut.position = pos;
     }
 }

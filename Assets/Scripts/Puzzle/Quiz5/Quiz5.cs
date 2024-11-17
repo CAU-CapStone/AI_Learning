@@ -21,6 +21,8 @@ public class Quiz5 : MonoBehaviour, IQuiz
 
     public void startQuiz()
     {
+        
+        GameManager.Instance.QuestTextSetActive(false);
         playerCamera.enabled = false;
         puzzleCamera.enabled = true;
 
@@ -29,10 +31,14 @@ public class Quiz5 : MonoBehaviour, IQuiz
 
     public void endQuiz()
     {
-        gameObject.SetActive(false);
+        if (!GameManager.Instance.isClearPuzzle4)
+        {
+            GameManager.Instance.SetQuestText("다른 도음이 필요한 사람을 찾아보자");
+        }
         OnQuizClear?.Invoke();
         //퀴즈 클리어시 사운드 효과
         SoundManager.Instance.PlaySoundOneShot("SuccessSound", 0.4f);
+        gameObject.SetActive(false);
     }
 
     public void failQuiz()

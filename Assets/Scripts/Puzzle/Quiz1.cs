@@ -30,6 +30,7 @@ public class Quiz1 : MonoBehaviour, IQuiz
 
     public void startQuiz()
     {
+        GameManager.Instance.QuestTextSetActive(false);
         playerCamera.enabled = false;
         puzzleCamera.enabled = true;
 
