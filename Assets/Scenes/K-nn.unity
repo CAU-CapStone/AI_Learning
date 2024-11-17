@@ -1492,7 +1492,7 @@ GameObject:
   - component: {fileID: 130665936}
   m_Layer: 0
   m_Name: NPC1Trigger
-  m_TagString: Portal
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3899,7 +3899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &309871719
 Transform:
   m_ObjectHideFlags: 0
@@ -6673,7 +6673,7 @@ GameObject:
   - component: {fileID: 561315466}
   m_Layer: 0
   m_Name: NPC4Trigger
-  m_TagString: Portal
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13063,7 +13063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1125032083
 Transform:
   m_ObjectHideFlags: 0
@@ -13840,7 +13840,7 @@ GameObject:
   - component: {fileID: 1180171601}
   m_Layer: 0
   m_Name: NPC2Trigger
-  m_TagString: Portal
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18090,6 +18090,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2090261984195776453, guid: 4a2f1fe7e36596049b29f061a77ff748, type: 3}
   m_PrefabInstance: {fileID: 1558214779}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1472101598 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8345744706187185799, guid: acadb201913fc8747a7020743c925f9f, type: 3}
+  m_PrefabInstance: {fileID: 1874923440}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1472101602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472101598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a546da7502d152f45aa0299a47691f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minAlpha: 0.3
+  maxAlpha: 1
+  blinkSpeed: 1.5
 --- !u!1 &1478044962
 GameObject:
   m_ObjectHideFlags: 0
@@ -22125,7 +22145,7 @@ GameObject:
   - component: {fileID: 1787073025}
   m_Layer: 0
   m_Name: NPC3Trigger
-  m_TagString: Portal
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23286,6 +23306,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1446343280021838090}
     m_Modifications:
+    - target: {fileID: 151734508173791389, guid: acadb201913fc8747a7020743c925f9f, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 151734508173791389, guid: acadb201913fc8747a7020743c925f9f, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 1418883676742063957, guid: acadb201913fc8747a7020743c925f9f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -23356,11 +23384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1418883676742063957, guid: acadb201913fc8747a7020743c925f9f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 309.76022
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1418883676742063957, guid: acadb201913fc8747a7020743c925f9f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 121.03
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1418883676742063957, guid: acadb201913fc8747a7020743c925f9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23374,6 +23402,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5479580622636475648, guid: acadb201913fc8747a7020743c925f9f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479580622636475648, guid: acadb201913fc8747a7020743c925f9f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479580622636475648, guid: acadb201913fc8747a7020743c925f9f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479580622636475648, guid: acadb201913fc8747a7020743c925f9f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6748549033240010956, guid: acadb201913fc8747a7020743c925f9f, type: 3}
       propertyPath: m_Name
       value: InteractionText
@@ -23381,7 +23425,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8345744706187185799, guid: acadb201913fc8747a7020743c925f9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1472101602}
   m_SourcePrefab: {fileID: 100100000, guid: acadb201913fc8747a7020743c925f9f, type: 3}
 --- !u!1001 &1876671915
 PrefabInstance:
