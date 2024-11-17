@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Quiz5_EnemyControll : MonoBehaviour
 {
     public Quiz5 quiz;
 
-    public GameObject gage;
+    public Quiz5_GageControll gage;
+    public Transform soldier;
+    private Animator animator;
+    private static readonly int IsAim = Animator.StringToHash("IsAim");
     
     public Quiz5Color color;
     public float detectionRange = 1.0f;
@@ -23,31 +27,50 @@ public class Quiz5_EnemyControll : MonoBehaviour
     void Start()
     {
         quiz = QuizDictionary.Instance.GetQuiz("Quiz5") as Quiz5;
+        quiz.OnQuizRetry += Initialize;
+        soldier = transform.Find("Soldier");
+        animator = soldier.GetComponent<Animator>();
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        detecting = false;
+        animator.SetBool(IsAim, false);
+        nowDetectionGage = 0.0f;
+        gage.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        detecting = (color != player.color &&
-                     Vector3.Distance(transform.position, player.transform.position) <= detectionRange);
-        
-        if (detecting)
+        if (quiz.isStart && player.isDetectable)
         {
-            nowDetectionGage += detectionGageRate * Time.deltaTime;
+            detecting = (color != player.color &&
+                         Vector3.Distance(transform.position, player.transform.position) <= detectionRange);
 
-            gage.SetActive(true);
-            gage.transform.localScale = new Vector3(nowDetectionGage / maxDetectionGage, 0.5f, 1);
-
-            if (nowDetectionGage >= maxDetectionGage)
+            if (detecting)
             {
-                quiz.failQuiz();
+                nowDetectionGage += detectionGageRate * Time.deltaTime;
+                
+                soldier.LookAt(player.transform);
+                animator.SetBool(IsAim, true);
+
+                gage.gameObject.SetActive(true);
+                gage.UpdateGage(nowDetectionGage / maxDetectionGage);
+
+                if (nowDetectionGage >= maxDetectionGage)
+                {
+                    quiz.isStart = false;
+                    quiz.failQuiz();
+                }
             }
-        }
-        else
-        {
-            nowDetectionGage = 0.0f;
-            
-            gage.SetActive(false);
+            else
+            {
+                animator.SetBool(IsAim, false);
+                nowDetectionGage = 0.0f;
+                gage.gameObject.SetActive(false);
+            }
         }
     }
 }

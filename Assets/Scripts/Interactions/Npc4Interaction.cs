@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Npc4Interaction : Interaction
 {
     private Quiz5 quiz5;
@@ -35,13 +37,17 @@ public class Npc4Interaction : Interaction
         quiz5.OnQuizClear -= ClearQuiz5;
         quiz5.OnQuizFail -= FailQuiz5;
         GameManager.Instance.SetMainCamera();
+        DialogueManager.Instance.onDialogueEnd.AddListener(EndDialogue);
         DialogueManager.Instance.SetDialogue(69, 69);
+    }
+    
+    private void EndDialogue()
+    {
+        GameManager.Instance.npc4.SetActive(false);
     }
 
     private void FailQuiz5()
     {
         DialogueManager.Instance.SetDialogue(68, 68);
     }
-    
-    
 }

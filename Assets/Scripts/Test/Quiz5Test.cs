@@ -22,13 +22,10 @@ public class Quiz5Test : Interaction
     void OnSuccess()
     {
         Debug.Log("Quiz5 success");
-        quiz.endQuiz();
     }
 
     void OnFail()
     {
         Debug.Log("Quiz5 failed");
-        
-        quiz.endQuiz();
     }
 }

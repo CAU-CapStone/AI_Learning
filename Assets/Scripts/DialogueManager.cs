@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
         canvasDialogue.enabled = true;
         ShowNextDialogue();
     }
-
+    
     public void ShowNextDialogue()
     {
         //만약 animator가 있는 npc면 interaction 실행

@@ -103,6 +103,7 @@ public class PlayerControll : MonoBehaviour
                 _interactionText.text = "";
                 Debug.Log("Interacting with Portal");
                 t.GetComponent<Interaction>().Activate();
+                _player._currentTrigger = null;
             }
         }
     }

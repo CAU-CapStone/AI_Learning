@@ -10,14 +10,19 @@ public class Quiz5_PlayerControll : MonoBehaviour
     
     [Header("Colors")]
     public Quiz5Color color = Quiz5Color.None;
-    public Material redMaterial;
-    public Material greenMaterial;
-    public Material blueMaterial;
+
+    public GameObject originForm;
+    private Animator originFormAnimator;
+    private static readonly int IsMove = Animator.StringToHash("IsMove");
+    public GameObject redForm;
+    public GameObject greenForm;
+    public GameObject blueForm;
     
     [Header("positions")]
     public Transform startPosition;
     public Transform endPosition;
     public List<Transform> movePoints = new();
+    private Transform nowDest;
     
     public int currentPoint = 0;
     public float speed = 0.3f;
@@ -26,47 +31,83 @@ public class Quiz5_PlayerControll : MonoBehaviour
     void Start()
     {
         quiz = QuizDictionary.Instance.GetQuiz("Quiz5") as Quiz5;
+        quiz.OnQuizRetry += Initialize;
+        
+        originFormAnimator = originForm.GetComponent<Animator>();
+        
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        isDetectable = false;
         transform.position = startPosition.position;
+        transform.rotation = Quaternion.identity;
+        nowDest = movePoints[0];
+        currentPoint = 0;
+        ChangeColorToOrigin();
     }
 
     // Update is called once per frame
     void Update()
     {
-        isDetectable = currentPoint > 0 && currentPoint < movePoints.Count;
+        originFormAnimator.SetBool(IsMove, quiz.isStart);
         
-        if (currentPoint > movePoints.Count)
+        if (quiz.isStart)
         {
-            quiz.endQuiz();
-        }
-        else if (currentPoint == movePoints.Count)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, endPosition.position, speed * Time.deltaTime);
-        }
-        else if (Vector3.Distance(transform.position, movePoints[currentPoint].position) < 0.1f)
-        {
-            currentPoint++;
-        }
-        else
-        {   
-            transform.position = Vector3.MoveTowards(transform.position, movePoints[currentPoint].position, speed * Time.deltaTime);
+            isDetectable = currentPoint > 0 && currentPoint < movePoints.Count;
+        
+            if (currentPoint > movePoints.Count)
+            {
+                quiz.isStart = false;
+                quiz.endQuiz();
+            }
+            else if (Vector3.Distance(transform.position, nowDest.position) < 0.1f)
+            {
+                currentPoint++;
+                nowDest = currentPoint < movePoints.Count ? movePoints[currentPoint] : endPosition;
+            }
+            else
+            {   
+                transform.position = Vector3.MoveTowards(transform.position, nowDest.position, speed * Time.deltaTime);
+                transform.LookAt(nowDest);
+            }
         }
     }
 
+    public void ChangeColorToOrigin()
+    {
+        color = Quiz5Color.None;
+        DisableAllForm();
+        originForm.SetActive(true);
+    }
+    
     public void ChangeColorToRed()
     {
         color = Quiz5Color.Red;
-        GetComponent<Renderer>().material = redMaterial;
+        DisableAllForm();
+        redForm.SetActive(true);
     }
     
     public void ChangeColorToGreen()
     {
         color = Quiz5Color.Green;
-        GetComponent<Renderer>().material = greenMaterial;
+        DisableAllForm();
+        greenForm.SetActive(true);
     }
     
     public void ChangeColorToBlue()
     {
         color = Quiz5Color.Blue;
-        GetComponent<Renderer>().material = blueMaterial;
+        DisableAllForm();
+        blueForm.SetActive(true);
+    }
+
+    private void DisableAllForm()
+    {
+        originForm.SetActive(false);
+        redForm.SetActive(false);
+        greenForm.SetActive(false);
+        blueForm.SetActive(false);
     }
 }
