@@ -43,10 +43,14 @@ public class Quiz4UIHandler : MonoBehaviour
         if(correct)
         {
             answerMessage.text = "정답입니다!";
+            retryButton.gameObject.SetActive(false);
+            finishButton.gameObject.SetActive(true);
         }
         else
         {
             answerMessage.text = "틀렸습니다.";
+            retryButton.gameObject.SetActive(true);
+            finishButton.gameObject.SetActive(false);
         }
     }
 
