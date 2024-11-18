@@ -42,11 +42,11 @@ public class Quiz4UIHandler : MonoBehaviour
         ResultUI.SetActive(true);
         if(correct)
         {
-            answerMessage.text = "Correct!";
+            answerMessage.text = "정답입니다!";
         }
         else
         {
-            answerMessage.text = "Wrong!";
+            answerMessage.text = "틀렸습니다.";
         }
     }
 

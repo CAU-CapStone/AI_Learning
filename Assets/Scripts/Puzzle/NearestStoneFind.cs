@@ -16,17 +16,13 @@ public class NearestStoneFind : MonoBehaviour
     private int selectedK = 0;
     private int currentQuizCount = 0;
 
+    public List<Transform> referenceStonePos; 
+
     private void Start()
     {
         foreach (Transform child in transform)
         {
             stones.Add(child.gameObject);
-        }
-        
-        Renderer renderer = referenceStone.GetComponent<Renderer>();
-        if(renderer != null)
-        {
-            renderer.material.color = Color.yellow;
         }
 
         initNearestStone();
@@ -43,10 +39,12 @@ public class NearestStoneFind : MonoBehaviour
 
     private void PlaceReferenceStone()
     {
-        float randomX = Random.Range(-4.2f, 0.8f);
-        float y = 1.0f;
-        float randomZ = Random.Range(-1f, -4f);
-        referenceStone.transform.localPosition = new Vector3(randomX,y,randomZ);
+        /*
+                float randomX = Random.Range(-4.2f, 0.8f);
+                float y = 1.0f;
+                float randomZ = Random.Range(-1f, -4f);
+        */
+        referenceStone.transform.localPosition = referenceStonePos[currentQuizCount].localPosition;
     }
 
     private void SetClosestStones()

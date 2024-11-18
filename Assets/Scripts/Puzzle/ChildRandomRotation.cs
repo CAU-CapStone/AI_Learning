@@ -10,7 +10,7 @@ public class ChildRandomRotation : MonoBehaviour
         {
             GameObject child = transform.GetChild(i).gameObject;
 
-            float randomX = Random.Range(0f, 360f);
+            float randomX = child.transform.eulerAngles.x;
             float randomY = Random.Range(0f, 360f);
             float randomZ = Random.Range(0f, 360f);
             child.transform.rotation = Quaternion.Euler(randomX, randomY, randomZ);
