@@ -24,7 +24,6 @@ public class Quiz4 : MonoBehaviour, IQuiz
         if (!GameManager.Instance.isClearPuzzle5)
         {
         }
-        GameManager.Instance.SetMagicCircleOutPos(new Vector3(69.93f,21.9f, 42.95f));
         gameObject.SetActive(false);
         OnQuizClear?.Invoke();
     }

@@ -51,6 +51,7 @@ public class Npc2Interaction : Interaction
     {
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndPuzzle3Dialogue);
         GameManager.Instance.SetQuestText("밖으로 나가 도움이 필요한 사람을 찾자");
+        GameManager.Instance.PortalActive(3);
         GameManager.Instance.npc3.SetActive(true);
         GameManager.Instance.npc4.SetActive(true);
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc2, false);

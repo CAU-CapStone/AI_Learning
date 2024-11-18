@@ -44,8 +44,7 @@ public class GameManager : MonoBehaviour
     public bool isAllowedToMove = false;
 
     public TMP_Text quest;
-    public Transform magicCircle;
-    public Transform magicCircleOut;
+    public GameObject portal;
 
     private void Awake()
     {
@@ -61,6 +60,7 @@ public class GameManager : MonoBehaviour
         }
         StartGame();
         SetQuestText("책상 위에 편지를 읽어보자");
+        PortalActive(0);
     }
     
     public void StartGame()
@@ -154,17 +154,18 @@ public class GameManager : MonoBehaviour
     {
         quest.transform.parent.gameObject.SetActive(b);
     }
-    public void SetMagicCirclePos(Vector3 pos)
-    {
-        magicCircle.position = pos;
-    }
-    public void SetMagicCircleOutPos(Vector3 pos)
-    {
-        magicCircleOut.position = pos;
-    }
 
     public void SetNpcLightBulbActive(GameObject npc, bool b)
     {
         npc.transform.Find("LightBulb").gameObject.SetActive(b);
+    }
+    
+    public void PortalActive(int portalNum)
+    {
+        for(int i = 0; i < portal.transform.childCount; ++i)
+        {
+            portal.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        portal.transform.GetChild(portalNum).gameObject.SetActive(true);
     }
 }
