@@ -160,4 +160,9 @@ public class GameManager : MonoBehaviour
     {
         magicCircleOut.position = pos;
     }
+
+    public void SetNpcLightBulbActive(GameObject npc, bool b)
+    {
+        npc.transform.Find("LightBulb").gameObject.SetActive(b);
+    }
 }

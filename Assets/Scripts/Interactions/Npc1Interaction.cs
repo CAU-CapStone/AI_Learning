@@ -76,5 +76,7 @@ public class Npc1Interaction : Interaction
         GameManager.Instance.SetMagicCirclePos(new Vector3(17.2600002f,-1.428f,494f));
         GameManager.Instance.SetMagicCircleOutPos(new Vector3(61.22f,22.2f,27.82f));
         GameManager.Instance.SetQuestText("장로님을 뵈러 가자");
+        GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc1, false);
+        GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc2, true);
     }
 }

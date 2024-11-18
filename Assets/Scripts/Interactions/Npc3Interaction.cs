@@ -42,5 +42,6 @@ public class Npc3Interaction : Interaction
     {
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndDialogue);
         GameManager.Instance.SetQuestText("도울 사람을 찾아보자");
+        GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc3, false);
     }
 }

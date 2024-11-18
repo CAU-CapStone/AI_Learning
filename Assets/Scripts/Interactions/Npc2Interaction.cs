@@ -26,7 +26,7 @@ public class Npc2Interaction : Interaction
     private void StartPuzzle3()
     {
         DialogueManager.Instance.onDialogueEnd.RemoveListener(StartPuzzle3);
-        DialogueManager.Instance.SetDialogue(27, 27);
+        DialogueManager.Instance.SetDialogue(81, 81);
         quiz3.startQuiz();
         quiz3.OnQuizClear += EndPuzzle3;
     }
@@ -46,5 +46,8 @@ public class Npc2Interaction : Interaction
         GameManager.Instance.SetQuestText("밖으로 나가 도움이 필요한 사람을 찾자");
         GameManager.Instance.npc3.SetActive(true);
         GameManager.Instance.npc4.SetActive(true);
+        GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc2, false);
+        GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc3, true);
+        GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc4, true);
     }
 }

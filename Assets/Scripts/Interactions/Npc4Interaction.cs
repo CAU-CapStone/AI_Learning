@@ -42,6 +42,7 @@ public class Npc4Interaction : Interaction
     {
         GameManager.Instance.npc4.SetActive(false);
         GameManager.Instance.SetQuestText("도울 사람을 찾아보자");
+        GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc4, false);
     }
 
     private void FailQuiz5()
