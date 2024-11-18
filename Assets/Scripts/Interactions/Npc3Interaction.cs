@@ -41,7 +41,16 @@ public class Npc3Interaction : Interaction
     private void EndDialogue()
     {
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndDialogue);
-        GameManager.Instance.SetQuestText("도울 사람을 찾아보자");
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc3, false);
+        if (!GameManager.Instance.isClearPuzzle5)
+        {
+            GameManager.Instance.SetQuestText("도울 사람을 찾아보자");
+        }
+        else
+        {
+            GameManager.Instance.SetGameObjectLocation(GameManager.Instance.npc2, GameManager.Instance.npc2TeleportPosition);
+            GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc2, true);
+            GameManager.Instance.SetQuestText("장로님이 밖으로 나오신 것 같다. 말을 걸어보자");
+        }
     }
 }

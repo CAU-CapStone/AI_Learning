@@ -17,6 +17,13 @@ public class Npc2Interaction : Interaction
             DialogueManager.Instance.onDialogueEnd.AddListener(StartPuzzle3);
             DialogueManager.Instance.SetDialogue(25, 26);
         }
+        else if (GameManager.Instance.isClearPuzzle4 && GameManager.Instance.isClearPuzzle5)
+        {
+            GameManager.Instance.QuestTextSetActive(false);
+            GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc2, false);
+            DialogueManager.Instance.onDialogueEnd.AddListener(EndKnnDialogue);
+            DialogueManager.Instance.SetDialogue(82, 85);
+        }
         else
         {
             DialogueManager.Instance.SetDialogue(32, 32);
@@ -49,5 +56,12 @@ public class Npc2Interaction : Interaction
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc2, false);
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc3, true);
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc4, true);
+    }
+
+    private void EndKnnDialogue()
+    {
+        DialogueManager.Instance.onDialogueEnd.RemoveListener(EndKnnDialogue);
+        GameManager.Instance.SetQuestText("마을을 나가자");
+        GameManager.Instance.isClearKnn = true;
     }
 }

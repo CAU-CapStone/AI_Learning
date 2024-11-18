@@ -40,9 +40,19 @@ public class Npc4Interaction : Interaction
     
     private void EndDialogue()
     {
-        GameManager.Instance.npc4.SetActive(false);
-        GameManager.Instance.SetQuestText("도울 사람을 찾아보자");
+        DialogueManager.Instance.onDialogueEnd.RemoveListener(EndDialogue);
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc4, false);
+        GameManager.Instance.npc4.SetActive(false);
+        if (!GameManager.Instance.isClearPuzzle4)
+        {
+            GameManager.Instance.SetQuestText("도울 사람을 찾아보자");
+        }
+        else
+        {
+            GameManager.Instance.SetGameObjectLocation(GameManager.Instance.npc2, GameManager.Instance.npc2TeleportPosition);
+            GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc2, true);
+            GameManager.Instance.SetQuestText("장로님이 밖으로 나오신 것 같다. 말을 걸어보자");
+        }
     }
 
     private void FailQuiz5()

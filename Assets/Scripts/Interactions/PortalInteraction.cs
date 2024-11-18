@@ -6,6 +6,18 @@ public class PortalInteraction : Interaction
     
     public override void Activate()
     {
+        if (name.Equals("KnnTrigger"))
+        {
+            if (!GameManager.Instance.isClearKnn)
+            {
+                return;
+            }
+            else
+            {
+                GameManager.Instance.SetQuestText("새로운 마을을 탐험해보자");
+            }
+        }
+        
         if (name.Equals("DoorTrigger1") && !GameManager.Instance.isReadBook)
         {
             DialogueManager.Instance.SetDialogue(0, 0);
