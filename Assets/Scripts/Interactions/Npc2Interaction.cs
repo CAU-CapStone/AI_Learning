@@ -51,18 +51,26 @@ public class Npc2Interaction : Interaction
     {
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndPuzzle3Dialogue);
         GameManager.Instance.SetQuestText("밖으로 나가 도움이 필요한 사람을 찾자");
-        GameManager.Instance.PortalActive(3);
         GameManager.Instance.npc3.SetActive(true);
         GameManager.Instance.npc4.SetActive(true);
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc2, false);
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc3, true);
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc4, true);
+        
+        GameManager.Instance.house4OutPortal.SetActive(false);
+        GameManager.Instance.npc2Portal.SetActive(false);
+        
+        GameManager.Instance.house4InPortal.SetActive(true);
+        GameManager.Instance.npc3Portal.SetActive(true);
+        GameManager.Instance.npc4Portal.SetActive(true);
     }
 
     private void EndKnnDialogue()
     {
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndKnnDialogue);
         GameManager.Instance.SetQuestText("마을을 나가자");
+        GameManager.Instance.npc2Portal2.SetActive(false);
+        GameManager.Instance.knnPortal.SetActive(true);
         GameManager.Instance.isClearKnn = true;
     }
 }
