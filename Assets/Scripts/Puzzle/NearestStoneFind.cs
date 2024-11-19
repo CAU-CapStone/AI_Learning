@@ -78,6 +78,8 @@ public class NearestStoneFind : MonoBehaviour
             }
             else
             {
+                //다음 문제 효과음
+                SoundManager.Instance.PlaySoundOneShot("quiz3", 0.9f);
                 initNearestStone();
             }
         }

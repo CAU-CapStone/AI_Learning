@@ -16,6 +16,9 @@ public class StoneClickHandler : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //찍 소리 내기
+        SoundManager.Instance.PlaySoundOneShot("Squish", 0.9f);
+        
         if(isAnswer)
         {
             Renderer renderer = GetComponent<Renderer>();
