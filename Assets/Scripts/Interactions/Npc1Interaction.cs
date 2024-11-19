@@ -68,7 +68,6 @@ public class Npc1Interaction : Interaction
         GameManager.Instance.SetMainCamera();
         DialogueManager.Instance.onDialogueEnd.AddListener(EndNpc1Dialogue2);
         DialogueManager.Instance.SetDialogue(76, 80);
-        GameManager.Instance.PortalActive(2);
     }
 
     private void EndNpc1Dialogue2()
@@ -77,5 +76,12 @@ public class Npc1Interaction : Interaction
         GameManager.Instance.SetQuestText("장로님을 뵈러 가자");
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc1, false);
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc2, true);
+        
+        GameManager.Instance.npc1Portal.SetActive(false);
+        GameManager.Instance.house2OutPortal.SetActive(false);
+        
+        GameManager.Instance.house2InPortal.SetActive(true);
+        GameManager.Instance.house4OutPortal.SetActive(true);
+        GameManager.Instance.npc2Portal.SetActive(true);
     }
 }

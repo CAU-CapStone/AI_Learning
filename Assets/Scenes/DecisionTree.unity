@@ -9472,7 +9472,7 @@ MonoBehaviour:
   npc4: {fileID: 309871718}
   dt_pasture: {fileID: 1685837376}
   startPosition: {fileID: 1777731445}
-  house4Npc2Position: {fileID: 1478044963}
+  npc2TeleportPosition: {fileID: 0}
   dt_pastureNpc1Position: {fileID: 885312142}
   playerCamera: {fileID: 522811754}
   puzzleCamera: {fileID: 5248763773151084574}
@@ -9480,10 +9480,27 @@ MonoBehaviour:
   isClearPuzzle1: 0
   isClearPuzzle2: 0
   isClearPuzzle3: 0
+  isClearPuzzle4: 0
+  isClearPuzzle5: 0
+  isClearKnn: 0
   dt_isClearPuzzle1: 0
   dt_isEndPuzzle1Dialogue: 0
   dt_isClearPuzzle2: 0
+  frontBookPortal: {fileID: 0}
+  house1InPortal: {fileID: 0}
+  house2InPortal: {fileID: 0}
+  house2OutPortal: {fileID: 0}
+  house4InPortal: {fileID: 0}
+  house4OutPortal: {fileID: 0}
+  npc1Portal: {fileID: 0}
+  npc2Portal: {fileID: 0}
+  npc3Portal: {fileID: 0}
+  npc4Portal: {fileID: 0}
+  npc2Portal2: {fileID: 0}
+  knnPortal: {fileID: 0}
   isAllowedToMove: 1
+  quest: {fileID: 0}
+  portal: {fileID: 0}
   virtualCamera: {fileID: 1285004780}
   fadeImage: {fileID: 5968953744996932312}
 --- !u!1 &657553336 stripped
@@ -21267,6 +21284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quiz3: {fileID: 180171896}
   referenceStone: {fileID: 256782461}
+  referenceStonePos: []
 --- !u!1001 &1442393400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36980,6 +36998,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quiz4
       objectReference: {fileID: 0}
+    - target: {fileID: 6245539432007741434, guid: e5c68baec42a3574986a570e0c985372, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8431538695588900285, guid: e5c68baec42a3574986a570e0c985372, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -45395,7 +45417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &4929854950652754766
 GameObject:
   m_ObjectHideFlags: 0

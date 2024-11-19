@@ -36,6 +36,10 @@ public class LetterControl : Interaction
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndLetterDialogue);
         GameManager.Instance.SetQuestText("친구를 찾아 옆집으로 가자");
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc1, true);
-        GameManager.Instance.PortalActive(1);
+            
+        GameManager.Instance.frontBookPortal.SetActive(false);
+        GameManager.Instance.house1InPortal.SetActive(true);
+        GameManager.Instance.house2OutPortal.SetActive(true);
+        GameManager.Instance.npc1Portal.SetActive(true);
     }
 }

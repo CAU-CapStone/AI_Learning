@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     
     [Header("positions")]
     public Transform startPosition;
-    public Transform house4Npc2Position;
     public Transform npc2TeleportPosition;
     public Transform dt_pastureNpc1Position;
     
@@ -40,6 +39,20 @@ public class GameManager : MonoBehaviour
     public bool dt_isClearPuzzle1 = false;
     public bool dt_isEndPuzzle1Dialogue = false;
     public bool dt_isClearPuzzle2 = false;
+
+    [Header("Portal Effects")]
+    public GameObject frontBookPortal;
+    public GameObject house1InPortal;
+    public GameObject house2InPortal;
+    public GameObject house2OutPortal;
+    public GameObject house4InPortal;
+    public GameObject house4OutPortal;
+    public GameObject npc1Portal;
+    public GameObject npc2Portal;
+    public GameObject npc3Portal;
+    public GameObject npc4Portal;
+    public GameObject npc2Portal2;
+    public GameObject knnPortal;
     
     public bool isAllowedToMove = false;
 
@@ -60,7 +73,6 @@ public class GameManager : MonoBehaviour
         }
         StartGame();
         SetQuestText("책상 위에 편지를 읽어보자");
-        PortalActive(0);
     }
     
     public void StartGame()
@@ -158,14 +170,5 @@ public class GameManager : MonoBehaviour
     public void SetNpcLightBulbActive(GameObject npc, bool b)
     {
         npc.transform.Find("LightBulb").gameObject.SetActive(b);
-    }
-    
-    public void PortalActive(int portalNum)
-    {
-        for(int i = 0; i < portal.transform.childCount; ++i)
-        {
-            portal.transform.GetChild(i).gameObject.SetActive(false);
-        }
-        portal.transform.GetChild(portalNum).gameObject.SetActive(true);
     }
 }
