@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    private AudioClip GetAudioClip(string soundName)
+    public AudioClip GetAudioClip(string soundName)
     {
         if (!audioClipCache.TryGetValue(soundName, out AudioClip clip))
         {

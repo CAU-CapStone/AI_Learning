@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Vector3;
 
 public class PlayerControll : MonoBehaviour
 {
@@ -13,11 +14,15 @@ public class PlayerControll : MonoBehaviour
     
     private CharacterController controller;
     private Vector2 moveDirection = Vector2.zero;
-    private Vector3 lookDirection = Vector3.zero;
+    private Vector3 lookDirection = zero;
 
     private Player _player;
     private Animator _animator;
     TMP_Text _interactionText;
+    
+    private AudioSource _footsteps;
+    private AudioClip _insideFootsteps;
+    private AudioClip _outsideFootsteps;
     
     void Awake()
     {
@@ -30,6 +35,12 @@ public class PlayerControll : MonoBehaviour
         controller = GetComponent<CharacterController>();
         _player = GetComponent<Player>();
         _animator = GetComponent<Animator>();
+        
+        //발소리 관련 
+        _insideFootsteps = SoundManager.Instance.GetAudioClip("footsteps_wood");
+        _outsideFootsteps = SoundManager.Instance.GetAudioClip("footsteps_grass");
+        _footsteps = gameObject.GetComponent<AudioSource>();
+        _footsteps.clip = _insideFootsteps;
     }
 
     // Update is called once per frame
@@ -40,7 +51,7 @@ public class PlayerControll : MonoBehaviour
             return;
         }
         controller.transform.Rotate(lookDirection);
-        lookDirection = Vector3.zero;
+        lookDirection = zero;
         
         var move = transform.right * moveDirection.x + transform.forward * moveDirection.y;
         controller.Move(speed * Time.deltaTime * move);
@@ -50,21 +61,29 @@ public class PlayerControll : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        
         Vector2 value2 = value.Get<Vector2>();
         //대화 중에는 움직이기 방지
         if(DialogueManager.Instance.isDialogue || !GameManager.Instance.isAllowedToMove)
         {
-            value2 = Vector2.zero;
+            _footsteps.Stop();
+            _animator.SetBool("isWalking", false);
+            moveDirection = Vector2.zero;
+            return;
         }
         //움직일때는 커서 보이지 않게 하기
         if (value2 != Vector2.zero)
         {
             _animator.SetBool("isWalking", true);
+            if (!_footsteps.isPlaying)
+            {
+                _footsteps.Play();
+                _footsteps.loop = true;
+            }
             Cursor.visible = false;
         }
         else
         {
+            _footsteps.Stop();
             _animator.SetBool("isWalking", false);
             Cursor.visible = true;
         }
@@ -102,7 +121,10 @@ public class PlayerControll : MonoBehaviour
             {
                 _interactionText.text = "";
                 Debug.Log("Interacting with Portal");
+                //발소리 바꾸기 위해 집 안인지 밖인지 구분
+                ChangeFootstep(t.parent.name.Equals("MapTriggers"));
                 t.GetComponent<Interaction>().Activate();
+                
                 _player._currentTrigger = null;
             }
         }
@@ -122,5 +144,11 @@ public class PlayerControll : MonoBehaviour
     {
         camera.transform.position = transform.position - transform.forward * 5 + transform.up * 1.5f;
         camera.transform.LookAt(transform.position + transform.up * 1.5f);
+    }
+    
+    //발걸음 소리 변경
+    void ChangeFootstep(bool inside)
+    {
+        _footsteps.clip = inside ? _insideFootsteps : _outsideFootsteps;
     }
 }
