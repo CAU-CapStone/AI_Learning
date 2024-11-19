@@ -42,13 +42,15 @@ public class Quiz4UIHandler : MonoBehaviour
         ResultUI.SetActive(true);
         if(correct)
         {
-            answerMessage.text = "Á¤´äÀÔ´Ï´Ù!";
+            answerMessage.text = "ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½!";
+            SoundManager.Instance.PlaySoundOneShot("quiz4",0.8f);
             retryButton.gameObject.SetActive(false);
             finishButton.gameObject.SetActive(true);
         }
         else
         {
-            answerMessage.text = "Æ²·È½À´Ï´Ù.";
+            answerMessage.text = "Æ²ï¿½È½ï¿½ï¿½Ï´ï¿½.";
+            SoundManager.Instance.PlaySoundOneShot("Error",0.8f);
             retryButton.gameObject.SetActive(true);
             finishButton.gameObject.SetActive(false);
         }

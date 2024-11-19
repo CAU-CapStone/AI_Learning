@@ -46,8 +46,16 @@ public class Quiz5_EnemyControll : MonoBehaviour
     {
         if (quiz.isStart && player.isDetectable)
         {
-            detecting = (color != player.color &&
+            // 사운드 실행을 위해 기존 detecting 값이 필요하기 때문에 임시 variable 'temp' 추가
+            
+            bool temp = (color != player.color &&
                          Vector3.Distance(transform.position, player.transform.position) <= detectionRange);
+            
+            if(temp && !detecting)
+            {
+                SoundManager.Instance.PlaySoundOneShot("quiz5Alert", 0.3f);
+            }
+            detecting = temp;
 
             if (detecting)
             {
