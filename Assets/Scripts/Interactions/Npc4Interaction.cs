@@ -21,6 +21,9 @@ public class Npc4Interaction : Interaction
 
     private void StartQuiz5()
     {
+        //퀴즈 배경음악
+        SoundManager.Instance.PlayQuiz();
+        
         DialogueManager.Instance.onDialogueEnd.RemoveListener(StartQuiz5);
         DialogueManager.Instance.SetDialogue(66, 67);
         quiz5.startQuiz();
@@ -30,6 +33,9 @@ public class Npc4Interaction : Interaction
 
     private void ClearQuiz5()
     {
+        //퀴즈 음악 정지
+        SoundManager.Instance.StopQuiz();
+        
         GameManager.Instance.isClearPuzzle5 = true;
         quiz5.OnQuizClear -= ClearQuiz5;
         quiz5.OnQuizFail -= FailQuiz5;

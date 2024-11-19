@@ -21,6 +21,7 @@ public class Npc1Interaction : Interaction
         }
         else if (!GameManager.Instance.isClearPuzzle2)
         {
+            
             DialogueManager.Instance.onDialogueEnd.AddListener(StartPuzzle2);
             DialogueManager.Instance.SetDialogue(74, 75);
         }
@@ -32,6 +33,8 @@ public class Npc1Interaction : Interaction
 
     private void StartPuzzle1()
     {
+        //퀴즈 배경음악
+        SoundManager.Instance.PlayQuiz();
         DialogueManager.Instance.onDialogueEnd.RemoveListener(StartPuzzle1);
         quiz1.startQuiz();
         quiz1.OnQuizClear += EndPuzzle1;
@@ -49,12 +52,16 @@ public class Npc1Interaction : Interaction
 
     private void EndNpc1Dialogue1()
     {
+        //퀴즈 음악 정지
+        SoundManager.Instance.StopQuiz();
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndNpc1Dialogue1);
         GameManager.Instance.SetQuestText("친구에게 다시 말을 걸어보자");
     }
 
     private void StartPuzzle2()
     {
+        //퀴즈 배경음악
+        SoundManager.Instance.PlayQuiz();
         DialogueManager.Instance.onDialogueEnd.RemoveListener(StartPuzzle2);
         DialogueManager.Instance.SetDialogue(21, 21);
         quiz2.startQuiz();
@@ -68,10 +75,14 @@ public class Npc1Interaction : Interaction
         GameManager.Instance.SetMainCamera();
         DialogueManager.Instance.onDialogueEnd.AddListener(EndNpc1Dialogue2);
         DialogueManager.Instance.SetDialogue(76, 80);
+        
     }
 
     private void EndNpc1Dialogue2()
     {
+        //퀴즈 음악 정지
+        SoundManager.Instance.StopQuiz();
+        
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndNpc1Dialogue2);
         GameManager.Instance.SetQuestText("장로님을 뵈러 가자");
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc1, false);

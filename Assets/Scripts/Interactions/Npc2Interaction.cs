@@ -32,6 +32,9 @@ public class Npc2Interaction : Interaction
     
     private void StartPuzzle3()
     {
+        //퀴즈 배경음악
+        SoundManager.Instance.PlayQuiz();
+        
         DialogueManager.Instance.onDialogueEnd.RemoveListener(StartPuzzle3);
         DialogueManager.Instance.SetDialogue(81, 81);
         quiz3.startQuiz();
@@ -40,6 +43,10 @@ public class Npc2Interaction : Interaction
 
     private void EndPuzzle3()
     {
+        
+        //퀴즈 음악 정지
+        SoundManager.Instance.StopQuiz();
+        
         quiz3.OnQuizClear -= EndPuzzle3;
         GameManager.Instance.isClearPuzzle3 = true;
         GameManager.Instance.SetMainCamera();
