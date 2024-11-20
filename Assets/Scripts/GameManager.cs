@@ -72,16 +72,20 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        StartGame();
+    }
+
+    IEnumerator Start()
+    {
+        
+        SoundManager.Instance.PlaySoundOneShot("Warp");
+        SetPlayerLocation(startPosition,false);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(Fade(false));
+        yield return new WaitForSeconds(0.7f);
+        isAllowedToMove = true;
         SetQuestText("책상 위에 편지를 읽어보자");
     }
-    
-    public void StartGame()
-    {
-        isAllowedToMove = true;
-        SetPlayerLocation(startPosition,false);
-    }
-    
+
     [SerializeField] CinemachineVirtualCamera virtualCamera;
     [SerializeField] Image fadeImage;
     public void SetPlayerLocation(Transform tf, bool isFade = false)
@@ -130,7 +134,7 @@ public class GameManager : MonoBehaviour
     {
         float portalFadeDuration = isFadeIn?0.4f:0.4f; // Time to fade in/out
         fadeImage.gameObject.SetActive(true);
-        float targetAlpha = isFadeIn ? 1:0.1f;
+        float targetAlpha = isFadeIn ? 1:0f;
         float startAlpha = isFadeIn ? 0:1;
         Color color = fadeImage.color;
         float timer = 0;
