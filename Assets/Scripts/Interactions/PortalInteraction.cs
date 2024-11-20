@@ -15,6 +15,9 @@ public class PortalInteraction : Interaction
             else
             {
                 GameManager.Instance.SetQuestText("새로운 마을을 탐험해보자");
+                SoundManager.Instance.PlaySoundOneShot("Warp");
+                GameManager.Instance.SetPlayerLocation(destPortal,true);
+                return;
             }
         }
         
