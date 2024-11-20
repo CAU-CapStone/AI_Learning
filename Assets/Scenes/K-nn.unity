@@ -10367,6 +10367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1fc8d8d1a83cff459483607d078ac6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quizMusic: {fileID: 826374979}
+  backgroundMusic: {fileID: 1645107554}
 --- !u!1 &804915752 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1069567032315564, guid: bdf8e7438a7816543998181bd3067573, type: 3}
@@ -21039,6 +21041,11 @@ MeshFilter:
 --- !u!4 &1645107553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7742889953026930654, guid: 31975729b6d58ea4db75d9c62c85212e, type: 3}
+  m_PrefabInstance: {fileID: 1929109957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1645107554 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6016629772514625682, guid: 31975729b6d58ea4db75d9c62c85212e, type: 3}
   m_PrefabInstance: {fileID: 1929109957}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1645495110

@@ -9,8 +9,8 @@ public class SoundManager : MonoBehaviour
     private Dictionary<string, AudioClip> audioClipCache;
     private AudioSource audioSource;
 
-    private AudioSource quizMusic;
-    private AudioSource backgroundMusic;
+    public AudioSource quizMusic;
+    public AudioSource backgroundMusic;
 
     private void Awake()
     {
@@ -25,16 +25,6 @@ public class SoundManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        var go = GameObject.Find("BackgroundMusicPlayer");
-        if (go != null)
-        {
-            backgroundMusic = go.transform.GetChild(0).GetComponent<AudioSource>();
-            quizMusic = go.transform.GetChild(1).GetComponent<AudioSource>();
         }
     }
 
