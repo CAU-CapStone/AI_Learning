@@ -112,6 +112,7 @@ public class PlayerControll : MonoBehaviour
         {
             if(t.CompareTag("NPC"))
             {
+                Cursor.visible = true;
                 DialogueManager.Instance.npc = t.parent;
                 _interactionText.text = "";
                 Debug.Log("Interacting with NPC");

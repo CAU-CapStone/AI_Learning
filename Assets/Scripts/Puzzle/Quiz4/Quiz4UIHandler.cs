@@ -42,14 +42,14 @@ public class Quiz4UIHandler : MonoBehaviour
         ResultUI.SetActive(true);
         if(correct)
         {
-            answerMessage.text = "�����Դϴ�!";
+            answerMessage.text = "정답입니다!";
             SoundManager.Instance.PlaySoundOneShot("quiz4",0.8f);
             retryButton.gameObject.SetActive(false);
             finishButton.gameObject.SetActive(true);
         }
         else
         {
-            answerMessage.text = "Ʋ�Ƚ��ϴ�.";
+            answerMessage.text = "틀렸습니다.";
             SoundManager.Instance.PlaySoundOneShot("Error",0.8f);
             retryButton.gameObject.SetActive(true);
             finishButton.gameObject.SetActive(false);

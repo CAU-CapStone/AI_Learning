@@ -48,12 +48,12 @@ public class Npc1Interaction : Interaction
         GameManager.Instance.SetMainCamera();
         DialogueManager.Instance.onDialogueEnd.AddListener(EndNpc1Dialogue1);
         DialogueManager.Instance.SetDialogue(70, 73);
+        //퀴즈 음악 정지
+        SoundManager.Instance.StopQuiz();
     }
 
     private void EndNpc1Dialogue1()
     {
-        //퀴즈 음악 정지
-        SoundManager.Instance.StopQuiz();
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndNpc1Dialogue1);
         GameManager.Instance.SetQuestText("친구에게 다시 말을 걸어보자");
     }
@@ -75,13 +75,12 @@ public class Npc1Interaction : Interaction
         GameManager.Instance.SetMainCamera();
         DialogueManager.Instance.onDialogueEnd.AddListener(EndNpc1Dialogue2);
         DialogueManager.Instance.SetDialogue(76, 80);
-        
+        //퀴즈 음악 정지
+        SoundManager.Instance.StopQuiz();
     }
 
     private void EndNpc1Dialogue2()
     {
-        //퀴즈 음악 정지
-        SoundManager.Instance.StopQuiz();
         
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndNpc1Dialogue2);
         GameManager.Instance.SetQuestText("장로님을 뵈러 가자");

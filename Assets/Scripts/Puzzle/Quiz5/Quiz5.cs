@@ -46,6 +46,7 @@ public class Quiz5 : MonoBehaviour, IQuiz
 
     public void startPlayer()
     {
+        SoundManager.Instance.PlaySoundOneShot("DialogueButtonSound");
         isStart = true;
         OnPlayerStart?.Invoke();
     }

@@ -58,7 +58,7 @@ public class Npc3Interaction : Interaction
             GameManager.Instance.SetGameObjectLocation(GameManager.Instance.npc2, GameManager.Instance.npc2TeleportPosition);
             GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc2, true);
             GameManager.Instance.npc2Portal2.SetActive(true);
-            GameManager.Instance.SetQuestText("장로님이 밖으로 나오신 것 같다. 말을 걸어보자");
+            GameManager.Instance.SetQuestText("장로님이 밖으로 나오신 것 같다.\r\n말을 걸어보자");
         }
     }
 }

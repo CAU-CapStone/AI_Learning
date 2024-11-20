@@ -45,7 +45,7 @@ public class SoundManager : MonoBehaviour
         return clip;
     }
 
-    public void PlaySoundOneShot(string soundName, float volume = 1f)
+    public void PlaySoundOneShot(string soundName, float volume = 0.3f)
     {
         AudioClip clip = GetAudioClip(soundName);
         if (clip != null)
@@ -58,15 +58,15 @@ public class SoundManager : MonoBehaviour
     {
         float fadeDuration = 1.0f;
         quizMusic.Play();
-        StartCoroutine(MusicFade(quizMusic, fadeDuration, 0, 0.25f));
-        StartCoroutine(MusicFade(backgroundMusic, fadeDuration, 0.5f, 0.0f));
+        StartCoroutine(MusicFade(quizMusic, fadeDuration, 0, 0.05f));
+        StartCoroutine(MusicFade(backgroundMusic, fadeDuration, 0.1f, 0.0f));
     }
     
     public void StopQuiz()
     {
         float fadeDuration = 1.0f;
-        StartCoroutine(MusicFade(quizMusic, fadeDuration, 0.25f, 0.0f));
-        StartCoroutine(MusicFade(backgroundMusic, fadeDuration, 0.0f, 0.5f));
+        StartCoroutine(MusicFade(quizMusic, fadeDuration, 0.05f, 0.0f));
+        StartCoroutine(MusicFade(backgroundMusic, fadeDuration, 0.0f, 0.1f));
     }
     
     IEnumerator MusicFade(AudioSource audioSource, float duration, float startVolume, float targetVolume)

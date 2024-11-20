@@ -53,7 +53,7 @@ public class Quiz5_EnemyControll : MonoBehaviour
             
             if(temp && !detecting)
             {
-                SoundManager.Instance.PlaySoundOneShot("quiz5Alert", 0.3f);
+                SoundManager.Instance.PlaySoundOneShot("quiz5Alert", 0.1f);
             }
             detecting = temp;
 

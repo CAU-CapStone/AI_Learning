@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        
         SoundManager.Instance.PlaySoundOneShot("Warp");
         SetPlayerLocation(startPosition,false);
         yield return new WaitForSeconds(1f);
