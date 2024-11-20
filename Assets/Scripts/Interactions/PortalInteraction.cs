@@ -42,12 +42,12 @@ public class PortalInteraction : Interaction
         if (name.Equals("DtTrigger"))
         {
             SoundManager.Instance.PlaySoundOneShot("Warp");
-        }
-        else
-        {
-            SoundManager.Instance.PlaySoundOneShot("DoorOpenSound");
+            return;
         }
         
+        //발소리 바꾸기 위해 집 안인지 밖인지 구분
+        SoundManager.Instance.ChangeFootstep(transform.parent.name.Equals("MapTriggers"));
+        SoundManager.Instance.PlaySoundOneShot("DoorOpenSound");
         GameManager.Instance.SetPlayerLocation(destPortal,true);
     }
 }

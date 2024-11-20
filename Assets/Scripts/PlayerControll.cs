@@ -20,9 +20,8 @@ public class PlayerControll : MonoBehaviour
     private Animator _animator;
     TMP_Text _interactionText;
     
-    private AudioSource _footsteps;
-    private AudioClip _insideFootsteps;
-    private AudioClip _outsideFootsteps;
+    public AudioSource _footsteps;
+    
     
     void Awake()
     {
@@ -37,10 +36,7 @@ public class PlayerControll : MonoBehaviour
         _animator = GetComponent<Animator>();
         
         //발소리 관련 
-        _insideFootsteps = SoundManager.Instance.GetAudioClip("footsteps_wood");
-        _outsideFootsteps = SoundManager.Instance.GetAudioClip("footsteps_grass");
         _footsteps = gameObject.GetComponent<AudioSource>();
-        _footsteps.clip = _insideFootsteps;
     }
 
     // Update is called once per frame
@@ -122,8 +118,6 @@ public class PlayerControll : MonoBehaviour
             {
                 _interactionText.text = "";
                 Debug.Log("Interacting with Portal");
-                //발소리 바꾸기 위해 집 안인지 밖인지 구분
-                ChangeFootstep(t.parent.name.Equals("MapTriggers"));
                 t.GetComponent<Interaction>().Activate();
                 
                 _player._currentTrigger = null;
@@ -145,11 +139,5 @@ public class PlayerControll : MonoBehaviour
     {
         camera.transform.position = transform.position - transform.forward * 5 + transform.up * 1.5f;
         camera.transform.LookAt(transform.position + transform.up * 1.5f);
-    }
-    
-    //발걸음 소리 변경
-    void ChangeFootstep(bool inside)
-    {
-        _footsteps.clip = inside ? _insideFootsteps : _outsideFootsteps;
     }
 }

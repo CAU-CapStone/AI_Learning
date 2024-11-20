@@ -11,6 +11,11 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource quizMusic;
     public AudioSource backgroundMusic;
+    
+    
+    public AudioSource _footsteps;
+    private AudioClip _insideFootsteps;
+    private AudioClip _outsideFootsteps;
 
     private void Awake()
     {
@@ -26,6 +31,21 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        //발소리 관련 
+        _insideFootsteps = SoundManager.Instance.GetAudioClip("footsteps_wood");
+        _outsideFootsteps = SoundManager.Instance.GetAudioClip("footsteps_grass");
+        _footsteps = GameManager.Instance.player.GetComponent<AudioSource>();
+        _footsteps.clip = _insideFootsteps;
+    }
+    
+    //발걸음 소리 변경
+    public void ChangeFootstep(bool inside)
+    {
+        _footsteps.clip = inside ? _insideFootsteps : _outsideFootsteps;
     }
 
     public AudioClip GetAudioClip(string soundName)
