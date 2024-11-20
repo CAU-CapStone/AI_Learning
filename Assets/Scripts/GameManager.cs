@@ -175,4 +175,10 @@ public class GameManager : MonoBehaviour
     {
         npc.transform.Find("LightBulb").gameObject.SetActive(b);
     }
+    
+    //플레이어가 transform t를 바라보게 함
+    public void PlayerLooksAt(Transform t)
+    {
+        player.transform.Rotate(0, Vector3.SignedAngle(player.transform.forward, t.position - player.transform.position, Vector3.up), 0);
+    }
 }

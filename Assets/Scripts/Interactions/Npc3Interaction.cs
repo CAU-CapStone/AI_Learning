@@ -40,8 +40,11 @@ public class Npc3Interaction : Interaction
         GameManager.Instance.isClearPuzzle4 = true;
         quiz4.OnQuizClear -= EndPuzzle4;
         GameManager.Instance.SetMainCamera();
+        //플레이어가 npc를 바라보게 함
+        GameManager.Instance.PlayerLooksAt(transform.parent);
         DialogueManager.Instance.SetDialogue(57, 57);
         DialogueManager.Instance.onDialogueEnd.AddListener(EndDialogue);
+        
     }
 
     private void EndDialogue()

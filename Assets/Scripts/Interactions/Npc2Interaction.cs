@@ -52,6 +52,8 @@ public class Npc2Interaction : Interaction
         GameManager.Instance.SetMainCamera();
         DialogueManager.Instance.onDialogueEnd.AddListener(EndPuzzle3Dialogue);
         DialogueManager.Instance.SetDialogue(28, 31);
+        //플레이어가 npc를 바라보게 함
+        GameManager.Instance.PlayerLooksAt(transform.parent);
     }
 
     private void EndPuzzle3Dialogue()

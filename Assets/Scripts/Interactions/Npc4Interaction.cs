@@ -36,10 +36,13 @@ public class Npc4Interaction : Interaction
         //퀴즈 음악 정지
         SoundManager.Instance.StopQuiz();
         
+        
         GameManager.Instance.isClearPuzzle5 = true;
         quiz5.OnQuizClear -= ClearQuiz5;
         quiz5.OnQuizFail -= FailQuiz5;
         GameManager.Instance.SetMainCamera();
+        //플레이어가 npc를 바라보게 함
+        GameManager.Instance.PlayerLooksAt(transform.parent);
         DialogueManager.Instance.onDialogueEnd.AddListener(EndDialogue);
         DialogueManager.Instance.SetDialogue(69, 69);
     }

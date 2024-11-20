@@ -50,6 +50,8 @@ public class Npc1Interaction : Interaction
         DialogueManager.Instance.SetDialogue(70, 73);
         //퀴즈 음악 정지
         SoundManager.Instance.StopQuiz();
+        //플레이어가 npc를 바라보게 함
+        GameManager.Instance.PlayerLooksAt(transform.parent);
     }
 
     private void EndNpc1Dialogue1()
@@ -77,11 +79,12 @@ public class Npc1Interaction : Interaction
         DialogueManager.Instance.SetDialogue(76, 80);
         //퀴즈 음악 정지
         SoundManager.Instance.StopQuiz();
+        //플레이어가 npc를 바라보게 함
+        GameManager.Instance.PlayerLooksAt(transform.parent);
     }
 
     private void EndNpc1Dialogue2()
     {
-        
         DialogueManager.Instance.onDialogueEnd.RemoveListener(EndNpc1Dialogue2);
         GameManager.Instance.SetQuestText("장로님을 뵈러 가자");
         GameManager.Instance.SetNpcLightBulbActive(GameManager.Instance.npc1, false);
