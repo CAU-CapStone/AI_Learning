@@ -12380,6 +12380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quizMusic: {fileID: 826374979}
   backgroundMusic: {fileID: 1645107554}
+  dtBackgroundMusic: {fileID: 1103172018}
   _footsteps: {fileID: 0}
 --- !u!1 &804915752 stripped
 GameObject:
@@ -20320,7 +20321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
+  m_sendNavigationEvents: 0
   m_DragThreshold: 10
 --- !u!4 &1378275535
 Transform:
