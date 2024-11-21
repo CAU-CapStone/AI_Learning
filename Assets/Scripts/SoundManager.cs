@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource quizMusic;
     public AudioSource backgroundMusic;
+    public AudioSource dtBackgroundMusic;
     
     
     public AudioSource _footsteps;
@@ -87,6 +88,13 @@ public class SoundManager : MonoBehaviour
         float fadeDuration = 1.0f;
         StartCoroutine(MusicFade(quizMusic, fadeDuration, 0.05f, 0.0f));
         StartCoroutine(MusicFade(backgroundMusic, fadeDuration, 0.0f, 0.1f));
+    }
+
+    public void ToDTMap()
+    {
+        float fadeDuration = 1.0f;
+        StartCoroutine(MusicFade(backgroundMusic, fadeDuration, 0.1f, 0.0f));
+        StartCoroutine(MusicFade(dtBackgroundMusic, fadeDuration, 0.0f, 0.1f));
     }
     
     IEnumerator MusicFade(AudioSource audioSource, float duration, float startVolume, float targetVolume)
