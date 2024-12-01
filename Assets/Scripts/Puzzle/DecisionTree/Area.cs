@@ -41,7 +41,8 @@ public class Area : MonoBehaviour
 
     public bool TryPlaceObject(GameObject selectedObject)
     {
-        if (inArea(selectedObject.transform) && isCorrectTag(selectedObject) && placedObjects < row * column)
+        //isCorrectTag 제거
+        if (inArea(selectedObject.transform) && placedObjects < row * column)
         {
             placedObjectList.Add(selectedObject);
             placedObjects++;
@@ -54,7 +55,8 @@ public class Area : MonoBehaviour
 
     public void placeObject(GameObject previousObject)
     {
-        if (isCorrectTag(previousObject) && placedObjects < row * column)
+        //isCorrectTag 제거
+        if (placedObjects < row * column)
         {
             placedObjectList.Add(previousObject);
             placedObjects++;
@@ -87,6 +89,24 @@ public class Area : MonoBehaviour
         return false;
     }
 
+    public bool checkChildTag()
+    {
+        bool result = true;
+        foreach(GameObject item in placedObjectList)
+        {
+            bool tagResult = false;
+            foreach(string tag in correctTag)
+            {
+                if(item.CompareTag(tag))
+                {
+                    tagResult = true;
+                }
+            }
+            result = result && tagResult;
+        }
+
+        return result;
+    }
 
     private void UpdateNextPosition()
     {
@@ -97,5 +117,12 @@ public class Area : MonoBehaviour
             currentPosition.x = topLeft.position.x;
             currentPosition.z -= zSpacing;
         }
+    }
+
+    public void clear()
+    {
+        placedObjectList.Clear();
+        placedObjects= 0;
+        currentPosition = topLeft.transform.position;
     }
 }

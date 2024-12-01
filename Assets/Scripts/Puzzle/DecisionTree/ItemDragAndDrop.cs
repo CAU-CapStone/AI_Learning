@@ -59,7 +59,7 @@ public class ItemDragAndDrop : MonoBehaviour
             if (dragPlane.Raycast(ray, out distance))
             {
                 Vector3 hitPoint = ray.GetPoint(distance);
-                Vector3 newPosition = hitPoint - offset;
+                Vector3 newPosition = hitPoint + offset;
 
                 newPosition.y = selectedObject.transform.position.y;
                 selectedObject.transform.position = newPosition;
