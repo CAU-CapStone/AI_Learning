@@ -12,14 +12,15 @@ public class PortalInteraction : Interaction
             {
                 return;
             }
-            else
+            else if (!GameManager.Instance.dt_isClearPuzzle1)
             {
                 GameManager.Instance.SetQuestText("새로운 마을을 탐험해보자");
-                SoundManager.Instance.PlaySoundOneShot("Warp");
-                GameManager.Instance.SetPlayerLocation(destPortal,true);
-                SoundManager.Instance.ToDTMap();
-                return;
             }
+            
+            SoundManager.Instance.PlaySoundOneShot("Warp");
+            GameManager.Instance.SetPlayerLocation(destPortal,true);
+            SoundManager.Instance.ToDTMap();
+            return;
         }
         
         if (name.Equals("DoorTrigger1") && !GameManager.Instance.isReadBook)
@@ -43,6 +44,8 @@ public class PortalInteraction : Interaction
         if (name.Equals("DtTrigger"))
         {
             SoundManager.Instance.PlaySoundOneShot("Warp");
+            GameManager.Instance.SetPlayerLocation(destPortal,true);
+            SoundManager.Instance.ToKnnMap();
             return;
         }
         

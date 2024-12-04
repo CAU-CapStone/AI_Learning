@@ -11,8 +11,8 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource quizMusic;
     public AudioSource backgroundMusic;
+    public AudioSource knnBackgroundMusic;
     public AudioSource dtBackgroundMusic;
-    
     
     public AudioSource _footsteps;
     private AudioClip _insideFootsteps;
@@ -90,11 +90,16 @@ public class SoundManager : MonoBehaviour
         StartCoroutine(MusicFade(backgroundMusic, fadeDuration, 0.0f, 0.1f));
     }
 
+    public void ToKnnMap()
+    {
+        float fadeDuration = 1.0f;
+        StartCoroutine(ChangeBgm(knnBackgroundMusic, fadeDuration, 0.1f, 0.0f));
+    }
+    
     public void ToDTMap()
     {
         float fadeDuration = 1.0f;
-        StartCoroutine(MusicFade(backgroundMusic, fadeDuration, 0.1f, 0.0f));
-        StartCoroutine(MusicFade(dtBackgroundMusic, fadeDuration, 0.0f, 0.1f));
+        StartCoroutine(ChangeBgm(dtBackgroundMusic, fadeDuration, 0.1f, 0.0f));
     }
     
     IEnumerator MusicFade(AudioSource audioSource, float duration, float startVolume, float targetVolume)
@@ -105,6 +110,28 @@ public class SoundManager : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             audioSource.volume = Mathf.Lerp(startVolume, targetVolume, currentTime / duration);
+            yield return null;
+        }
+    }
+    
+    IEnumerator ChangeBgm(AudioSource audioSource, float duration, float startVolume, float targetVolume)
+    {
+        float currentTime = 0;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            backgroundMusic.volume = Mathf.Lerp(startVolume, targetVolume, currentTime / duration);
+            yield return null;
+        }
+
+        backgroundMusic = audioSource;
+        currentTime = 0;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            backgroundMusic.volume = Mathf.Lerp(targetVolume, startVolume, currentTime / duration);
             yield return null;
         }
     }

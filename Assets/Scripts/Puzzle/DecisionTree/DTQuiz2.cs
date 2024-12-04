@@ -46,9 +46,7 @@ public class DTQuiz2 : MonoBehaviour, IQuiz
 
     public void endQuiz()
     {
-        //SoundManager 버그로 인해 소리 재생시 퀴즈 종료가 안됨
-        //밑의 소리 재생 코드 한줄 주석처리 하겠음. SoundManager 버그 수정시 주석 해제.
-        //SoundManager.Instance.PlaySoundOneShot("SuccessSound", 0.4f);
+        SoundManager.Instance.PlaySoundOneShot("SuccessSound", 0.4f);
         gameObject.SetActive(false);
         OnQuizClear?.Invoke();
     }
@@ -68,10 +66,21 @@ public class DTQuiz2 : MonoBehaviour, IQuiz
         foreach (Area area in areaList)
         {
             placedObjectSum += area.placedObjectList.Count;
-            if (!area.checkChildTag()) return false;
+            if (!area.checkChildTag())
+            {
+                SoundManager.Instance.PlaySoundOneShot("Error",0.8f);
+                return false;
+            }
         }
-
-        return itemCount==placedObjectSum ? true : false;
+        
+        if (itemCount == placedObjectSum)
+        {
+            SoundManager.Instance.PlaySoundOneShot("quiz4",0.8f);
+            return true;
+        }
+        
+        SoundManager.Instance.PlaySoundOneShot("Error",0.8f);
+        return false;
     }
 
     public void resetQuiz()

@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject npc2;
     public GameObject npc3;
     public GameObject npc4;
+    public GameObject dt_npc1;
+    public GameObject dt_npc2;
     public GameObject dt_pasture;
     
     [Header("positions")]
@@ -37,8 +39,8 @@ public class GameManager : MonoBehaviour
     public bool isClearPuzzle4 = false;
     public bool isClearPuzzle5 = false;
     public bool isClearKnn = false;
-    public bool dt_isClearPuzzle1 = false;
     public bool dt_isEndPuzzle1Dialogue = false;
+    public bool dt_isClearPuzzle1 = false;
     public bool dt_isClearPuzzle2 = false;
 
     [Header("Portal Effects")]
@@ -54,6 +56,8 @@ public class GameManager : MonoBehaviour
     public GameObject npc4Portal;
     public GameObject npc2Portal2;
     public GameObject knnPortal;
+    public GameObject dt_npc1Portal;
+    public GameObject dt_npc2Portal;
     
     public bool isAllowedToMove = false;
 

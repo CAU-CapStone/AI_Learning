@@ -129,6 +129,7 @@ public class PlayerControll : MonoBehaviour
     {
         if(DialogueManager.Instance.isDialogue)
         {
+            Debug.Log("show next dialogue");
             DialogueManager.Instance.ShowNextDialogue();
         }
     }
