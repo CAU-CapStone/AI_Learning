@@ -2333,6 +2333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DTQuiz2
       objectReference: {fileID: 0}
+    - target: {fileID: 8345620860360727753, guid: 98a66f0a12f68a64b8776f57ba8410ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22232,6 +22236,10 @@ PrefabInstance:
     - target: {fileID: 26238634806986858, guid: 0703bf60278b7334bae40f355167878f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255885550440250241, guid: 0703bf60278b7334bae40f355167878f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7014796719151848981, guid: 0703bf60278b7334bae40f355167878f, type: 3}
       propertyPath: m_Name
