@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DTQuiz1UIHandler : MonoBehaviour
 {
-    public DTQuiz1 dtQuiz1;
+    public DTQuiz1_New dtQuiz1;
 
     public Button submitQuiz;
     public Button retryButton;
@@ -27,14 +27,14 @@ public class DTQuiz1UIHandler : MonoBehaviour
         bool quizResult = dtQuiz1.checkQuizResult();
         if (quizResult)
         {
-            resultText.text = "Á¤´äÀÔ´Ï´Ù!";
+            resultText.text = "ì •ë‹µìž…ë‹ˆë‹¤!";
             finishButton.gameObject.SetActive(true);
             retryButton.gameObject.SetActive(false);
             resultUI.SetActive(true);
         }
         else
         {
-            resultText.text = "¿À´äÀÔ´Ï´Ù!";
+            resultText.text = "ì˜¤ë‹µìž…ë‹ˆë‹¤!";
             finishButton.gameObject.SetActive(false);
             retryButton.gameObject.SetActive(true);
             resultUI.SetActive(true);
@@ -55,7 +55,7 @@ public class DTQuiz1UIHandler : MonoBehaviour
 
     public void resetUI()
     {
-        resultText.text = "Á¤´ä or ¿À´ä";
+        resultText.text = "ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½";
         finishButton.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
         resultUI.SetActive(false);

@@ -74,7 +74,7 @@ public class ItemDragAndDrop : MonoBehaviour
                 {
                     if(area.TryPlaceObject(selectedObject))
                     {
-                        selectedObject.layer = LayerMask.GetMask("Default");
+                        //selectedObject.layer = LayerMask.GetMask("Default");
                         outArea= false;
                     }
                 }
