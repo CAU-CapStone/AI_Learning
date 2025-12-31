@@ -1,4 +1,4 @@
-[다운로드 링크](https://github.com/CAU-CapStone/AI_Learn/releases/tag/Release)
+[[다운로드 링크]](https://github.com/CAU-CapStone/AI_Learn/releases/tag/Release)
 
 ![1](https://github.com/CAU-CapStone/AI_Learn-Release/blob/main/Manual/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C1.PNG)
 ![1](https://github.com/CAU-CapStone/AI_Learn-Release/blob/main/Manual/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C2.PNG)
